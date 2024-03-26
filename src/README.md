@@ -10,19 +10,19 @@ So the general project structure will be the following:
 
 Italics represent folders.
 
-- ## _src_
+- ### _src_
   `Root folder`
-  - ## page.tsx
+  - ### page.tsx
     `Index page (/)`
-  - ## layout.tsx
+  - ### layout.tsx
     `This layout will be applied to the whole app. Useful for navbars and footers, among other things.`
-  - ## _components_
+  - ### _components_
     `General components used throughout the whole app.`
-    - ## component_example.tsx
+    - ### component_example.tsx
       `Component example.`
-  - ## _about_me_
+  - ### _about_me_
     `Page example.`
-    - ## page.tsx
+    - ### page.tsx
       `About me page (/about_me)`
-    - ## _components_
+    - ### _components_
       `Components used only in the about me page`
