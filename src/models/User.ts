@@ -1,7 +1,18 @@
 import mongoose from 'mongoose';
 
 
-const UserSchema = new mongoose.Schema({
+export interface IUser {
+    name?: string,
+    lastname?: string,
+    email: string,
+    password: string,
+    emailVerified?: Date,
+    image?: string,
+    role: string
+}
+
+
+const UserSchema = new mongoose.Schema<IUser>({
     // The name property is required by Next-Auth.js
     name: {
         type: String,

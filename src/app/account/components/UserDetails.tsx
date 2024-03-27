@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { input_styles } from "@/app/login/components/LoginForm";
+import { IUser } from "@/models/User";
 import {
   Button,
   Card,
@@ -16,8 +17,9 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { IconCheck, IconLogout } from "@tabler/icons-react";
-import { signOut, useSession } from "next-auth/react";
-import React, { useEffect, useRef, useState } from "react";
+import { User } from "next-auth";
+import { SessionProvider, signOut, useSession } from "next-auth/react";
+import React, { useRef } from "react";
 
 async function verifyEmail({ email, code }: { email: string; code: string }) {
   const res = await fetch("/api/user/verify_email", {
@@ -46,7 +48,7 @@ async function updateName({
   return await res.json();
 }
 
-export default function UserDetails() {
+function UserDetails({ user }: { user: IUser }) {
   //Next Auth hook to get the session (client side);
   const { data: session } = useSession();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -69,7 +71,7 @@ export default function UserDetails() {
         <CardBody className="text-black flex flex-col gap-4">
           <div>
             <p className="text-xs">Email</p>
-            <div className="font-bold">{session?.user?.email}</div>
+            <div className="font-bold">{user.email}</div>
           </div>
           <Divider />
           <div>
@@ -78,7 +80,7 @@ export default function UserDetails() {
               {session.user.name ? (
                 <div className="flex justify-between items-center">
                   <p>
-                    {session?.user?.name} {session?.user?.lastname}
+                    {user.name} {user.lastname}
                   </p>
                   <Button
                     size="sm"
@@ -172,11 +174,15 @@ export default function UserDetails() {
                     const name = nameRef.current?.value!;
                     const lastname = lastNameRef.current?.value!;
 
-                    const res = await updateName({
-                      name: name,
-                      lastname: lastname,
-                      email: session.user.email,
-                    });
+                    //Validate that the name and lastname inputs are not empty
+                    if (name.length > 1 && lastname.length > 1) {
+                      const res = await updateName({
+                        name: name,
+                        lastname: lastname,
+                        email: session.user.email,
+                      });
+                      console.log(res);
+                    }
                   }}
                 >
                   <Input
@@ -208,5 +214,13 @@ export default function UserDetails() {
         </ModalContent>
       </Modal>
     </div>
+  );
+}
+
+export default function UserDetailsComponent({ user }: { user: IUser }) {
+  return (
+    <SessionProvider>
+      <UserDetails user={user} />
+    </SessionProvider>
   );
 }

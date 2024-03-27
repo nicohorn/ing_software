@@ -1,4 +1,4 @@
-import User from "./models/User";
+import User, { IUser } from "./models/User";
 import VerificationCode from "./models/VerificationCode";
 
 /**This function creates a new user, using the model created in the User.ts mongoose model.*/

@@ -1,13 +1,15 @@
-"use client";
-import { SessionProvider, signOut, useSession } from "next-auth/react";
 import React from "react";
 import UserDetails from "./components/UserDetails";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/authOptions";
+import { findUserByEmail } from "@/index";
+import { IUser } from "@/models/User";
+import UserDetailsComponent from "./components/UserDetails";
 
-export default function Page() {
+export default async function Page() {
+  const session = await getServerSession(authOptions);
+
+  const user: IUser = await findUserByEmail(session!.user.email!);
   //To get the session in the client, the component/page must be wrapped in the SessionProvider component.
-  return (
-    <SessionProvider>
-      <UserDetails />
-    </SessionProvider>
-  );
+  return <UserDetailsComponent user={user} />;
 }
