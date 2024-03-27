@@ -1,27 +1,41 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 import { Anton } from "next/font/google";
 import { IconUser } from "@tabler/icons-react";
+
+//Next Font for the "logo".
 const anton = Anton({
   weight: ["400"],
   subsets: ["latin-ext"],
 });
-
 export default function Navbar({
   links,
+  session,
 }: {
   links: {
-    title: string;
+    //Some links can have icons, that's why the title can be a string or a ReactNode.
+    title: string | React.ReactNode;
     url: string;
     access: string;
   }[];
+  session: any;
 }) {
+  //Dictionary for access control.
+  const accessDictionary: { [key: string]: string[] } = {
+    admin: ["public", "admin"],
+    user: ["public"],
+  };
+  //Use the function provided by next-auth to access the server session;
+
   //Use the nav element to make the HTML structure as semantic as possible.
   return (
-    <nav className="w-screen fixed top-0 h-20 flex items-center justify-center gap-10 bg-background left-0">
-      <div className={anton.className + " font-extrabold text-4xl "}>
+    <nav className="w-screen fixed top-0 h-20 flex items-center justify-center gap-10 bg-background left-0 z-30 shadow-lg">
+      <div
+        className={anton.className + " font-extrabold text-4xl active:scale-95"}
+      >
         <Link
-          className="active:scale-95 transition hover:text-accent font-semibold px-4 rounded-full hover:bg-primary"
+          className=" transition duration-75 hover:text-black font-semibold px-4 rounded-xl hover:bg-primary hover:shadow-lg"
           href="/"
         >
           Wekthor
@@ -31,7 +45,19 @@ export default function Navbar({
         {links.map((link) => {
           return (
             <Link
-              className="active:scale-95 transition hover:text-accent font-semibold px-2 py-1 rounded-full hover:bg-primary"
+              className={`active:scale-95 transition duration-75 hover:text-black font-semibold px-2 py-1 rounded-xl hover:bg-primary hover:shadow-lg ${
+                //If the link access is public, just show it.
+                link.access === "public"
+                  ? "block"
+                  : //If there's a session and the link has some type of access, show it according to the user role
+                  session &&
+                    accessDictionary[session.user.role].includes(link.access)
+                  ? "block"
+                  : //If there's no session and the link access is login, show the login link
+                  !session && link.access === "login"
+                  ? "block"
+                  : "hidden"
+              }`}
               key={link.url}
               href={link.url}
             >
@@ -40,10 +66,15 @@ export default function Navbar({
           );
         })}
         <Link
-          className="rounded-full p-1 hover:bg-primary hover:text-accent "
+          className="rounded-xl p-1 px-2 hover:bg-primary transition hover:text-black hover:shadow-lg"
           href={"/account"}
         >
-          <IconUser />
+          {/* If there's an active session, display the link to the account page. */}
+          {session ? (
+            <div className="flex gap-1 items-center">
+              {session.user?.email} <IconUser />
+            </div>
+          ) : null}
         </Link>
       </div>
     </nav>

@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Change autocomplete input background color */
+input:-webkit-autofill {
+  -webkit-background-clip: text;
+}

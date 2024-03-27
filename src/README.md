@@ -26,3 +26,6 @@ Italics represent folders.
       `About me page (/about_me)`
     - ### _components_
       `Components used only in the about me page`
+
+In the root folder (src) there's the _models_ which contains TypeScript files of the mongoose schemas and methods to manipulate data.
+The mongo_client.ts file creates the connection to the MongoDB database and the mongoose.ts file creates the mongoose client.

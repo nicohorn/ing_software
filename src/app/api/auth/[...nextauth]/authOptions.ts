@@ -3,6 +3,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import { Adapter } from "next-auth/adapters";
 import clientPromise from "@/mongo_client";
+import User from "@/models/User";
+import dbConnect from "@/mongoose";
+import { CustomUserType } from '@/types/next-auth';
+
 
 export const authOptions: NextAuthOptions = {
     adapter: MongoDBAdapter(clientPromise) as Adapter,
@@ -15,23 +19,73 @@ export const authOptions: NextAuthOptions = {
             // e.g. domain, username, password, 2FA token, etc.
             // You can pass any HTML attribute to the <input> tag through the object.
             credentials: {
-                username: { label: "Username", type: "text", placeholder: "jsmith" },
-                password: { label: "Password", type: "password" }
+                email: {
+                    label: 'Email',
+                    type: 'email',
+                    placeholder: 'jsmith@example.com',
+                },
+                password: { label: 'Password', type: 'password' },
             },
-            async authorize(credentials, req) {
+            async authorize(credentials) {
                 // Add logic here to look up the user from the credentials supplied
-                const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
+                await dbConnect();
+
+                const user = await User.findOne({ email: credentials?.email })
 
                 if (user) {
                     // Any object returned will be saved in `user` property of the JWT
+                    console.log("DATABASE USER", user)
                     return user
                 } else {
                     // If you return null then an error will be displayed advising the user to check their details.
-                    return null
+
+                    throw new Error('No user found with thar email')
 
                     // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
                 }
             }
         })
-    ]
+    ],
+    callbacks: {
+        async signIn({ user }) {
+            console.log("############## SIGN IN CALLBACK USER ##############")
+            console.log(user)
+            if (!user || !user.email) return false;
+            return true;
+        },
+        async jwt({ token, user }) {
+
+            // Check if the user object is available in the token
+            const decodedUser = token.user;
+            console.log("############## JWT CALLBACK USER ##############")
+            console.log(decodedUser)
+            console.log(decodedUser)
+
+            // If the user object is available, add it to the token
+            if (user) {
+                token.user = user;
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            const decodedUser = token.user as CustomUserType;
+
+            // Update the session.user object with the relevant properties
+            session.user = {
+                id: decodedUser._id.toString(), // Convert _id to a string
+                name: decodedUser.name,
+                lastname: decodedUser.lastname,
+                email: decodedUser.email,
+                role: decodedUser.role, // Include the role property if needed
+                // Include any other properties you want to expose in the session object
+            };
+
+            return session;
+        },
+    },
+    secret: process.env.NEXTAUTH_SECRET,
+    session: {
+        strategy: "jwt",
+    },
+    //debug: process.env.NODE_ENV === "development",
 }
