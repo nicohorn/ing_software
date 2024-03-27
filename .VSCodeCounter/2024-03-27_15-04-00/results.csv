@@ -1,0 +1,29 @@
+"filename", "language", "TypeScript", "TypeScript JSX", "Markdown", "CSS", "comment", "blank", "total"
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\README.md", "Markdown", 0, 0, 24, 0, 0, 8, 32
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\about\page.tsx", "TypeScript JSX", 0, 125, 0, 0, 1, 2, 128
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\components\UserDetails.tsx", "TypeScript JSX", 0, 199, 0, 0, 3, 10, 212
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\page.tsx", "TypeScript JSX", 0, 11, 0, 0, 1, 2, 14
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\auth\[...nextauth]\authOptions.ts", "TypeScript", 61, 0, 0, 0, 14, 9, 84
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\auth\[...nextauth]\route.ts", "TypeScript", 4, 0, 0, 0, 1, 2, 7
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\email\route.ts", "TypeScript", 32, 0, 0, 0, 2, 7, 41
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\route.ts", "TypeScript", 7, 0, 0, 0, 0, 5, 12
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_name\route.ts", "TypeScript", 7, 0, 0, 0, 0, 4, 11
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\verify_email\route.ts", "TypeScript", 11, 0, 0, 0, 0, 6, 17
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\components\Navbar.tsx", "TypeScript JSX", 0, 74, 0, 0, 6, 3, 83
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\components\Title.tsx", "TypeScript JSX", 0, 4, 0, 0, 0, 2, 6
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\page.tsx", "TypeScript JSX", 0, 4, 0, 0, 0, 2, 6
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\globals.css", "CSS", 0, 0, 0, 6, 1, 2, 9
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\layout.tsx", "TypeScript JSX", 0, 48, 0, 0, 3, 5, 56
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\login\components\LoginForm.tsx", "TypeScript JSX", 0, 88, 0, 0, 5, 6, 99
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\login\page.tsx", "TypeScript JSX", 0, 9, 0, 0, 0, 2, 11
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\page.tsx", "TypeScript JSX", 0, 128, 0, 0, 2, 1, 131
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\signup\components\SignUpForm.tsx", "TypeScript JSX", 0, 109, 0, 0, 5, 5, 119
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\signup\page.tsx", "TypeScript JSX", 0, 9, 0, 0, 0, 2, 11
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\index.ts", "TypeScript", 42, 0, 0, 0, 4, 15, 61
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\models\User.ts", "TypeScript", 30, 0, 0, 0, 5, 5, 40
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\models\VerificationCode.ts", "TypeScript", 17, 0, 0, 0, 0, 4, 21
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\mongo_client.ts", "TypeScript", 11, 0, 0, 0, 4, 8, 23
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\mongoose.ts", "TypeScript", 18, 0, 0, 0, 8, 4, 30
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\types\next-auth.d.ts", "TypeScript", 19, 0, 0, 0, 1, 9, 29
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\utils\hash.ts", "TypeScript", 21, 0, 0, 0, 2, 4, 27
+"Total", "-", 280, 808, 24, 6, 68, 134, 1320

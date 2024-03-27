@@ -76,17 +76,6 @@ export default function Navbar({
             </div>
           ) : null}
         </Link>
-        <button
-          onClick={async () => {
-            await fetch("/api/email", {
-              method: "POST",
-              mode: "cors",
-              body: JSON.stringify({ email: "nicoskate000@gmail.com" }),
-            });
-          }}
-        >
-          Send email
-        </button>
       </div>
     </nav>
   );

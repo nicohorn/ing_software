@@ -34,7 +34,6 @@ export const authOptions: NextAuthOptions = {
 
                 if (user) {
                     // Any object returned will be saved in `user` property of the JWT
-                    console.log("DATABASE USER", user)
                     return user
                 } else {
                     // If you return null then an error will be displayed advising the user to check their details.
@@ -48,19 +47,12 @@ export const authOptions: NextAuthOptions = {
     ],
     callbacks: {
         async signIn({ user }) {
-            console.log("############## SIGN IN CALLBACK USER ##############")
-            console.log(user)
             if (!user || !user.email) return false;
             return true;
         },
         async jwt({ token, user }) {
 
             // Check if the user object is available in the token
-            const decodedUser = token.user;
-            console.log("############## JWT CALLBACK USER ##############")
-            console.log(decodedUser)
-            console.log(decodedUser)
-
             // If the user object is available, add it to the token
             if (user) {
                 token.user = user;
@@ -76,8 +68,9 @@ export const authOptions: NextAuthOptions = {
                 name: decodedUser.name,
                 lastname: decodedUser.lastname,
                 email: decodedUser.email,
-                role: decodedUser.role, // Include the role property if needed
-                // Include any other properties you want to expose in the session object
+                emailVerified: decodedUser.emailVerified,
+                role: decodedUser.role,
+                // Here you can add any other properties you want to expose in the session object.
             };
 
             return session;

@@ -1,9 +1,11 @@
 
 export type CustomUserType = {
+
     _id: string,
     name: string,
     lastname: string,
     email: string,
+    emailVerified: Date;
     role: string,
 }
 

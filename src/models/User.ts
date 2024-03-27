@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema({
 
     },
     // The email property is required by Next-Auth.js
+    // The unique property prevents that an email is registered more than once.
     email: {
         type: String,
         required: true,

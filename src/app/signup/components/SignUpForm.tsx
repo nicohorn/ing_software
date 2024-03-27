@@ -1,31 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
+import { input_styles } from "@/app/login/components/LoginForm";
 import { Button, Card, CardBody, Input } from "@nextui-org/react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
-
-const input_styles = {
-  label: "text-black/50",
-  input: [
-    "bg-transparent",
-    "text-black/90",
-    "placeholder:text-black/50 dark:placeholder:text-black/60",
-  ],
-  innerWrapper: "bg-transparent",
-  inputWrapper: [
-    "shadow-xl",
-    "bg-default-200/50",
-    "dark:bg-default/60",
-    "backdrop-blur-xl",
-    "backdrop-saturate-200",
-    "hover:bg-default-200/70",
-    "dark:hover:bg-default/70",
-    "group-data-[focused=true]:bg-default-200/50",
-    "dark:group-data-[focused=true]:bg-default/60",
-    "!cursor-text",
-  ],
-};
 
 async function createNewUser({
   email,
@@ -81,6 +60,17 @@ export default function SignUpForm() {
                     password: password,
                     callbackUrl: "/account",
                   });
+
+                  //Send email verification code
+                  const randomCode = (Math.random() + 1)
+                    .toString(36)
+                    .substring(7);
+                  const verificationCode = await fetch("/api/email", {
+                    method: "POST",
+                    mode: "cors",
+                    body: JSON.stringify({ email: email, code: randomCode }),
+                  });
+                  console.log(verificationCode);
                 } else {
                   console.log("There was an error creating the account");
                 }

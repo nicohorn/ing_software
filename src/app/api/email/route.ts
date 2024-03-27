@@ -1,25 +1,41 @@
+import nodemailer from "nodemailer"
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from 'resend';
+import { createVerificationCode } from "@/index";
 
 
+//For the mailing part, follow this tutorial: https://www.freecodecamp.org/news/use-nodemailer-to-send-emails-from-your-node-js-server/
+//I had to tweak a bit the auth object but it's working fine like this!
+let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+        type: "OAuth2",
+        user: process.env.NEXT_PUBLIC_GMAIL_USER, //Your gmail
+        clientId: process.env.OAUTH_CLIENTID,
+        clientSecret: process.env.OAUTH_CLIENT_SECRET,
+        refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+
+    },
+});
 export async function POST(req: NextRequest) {
-    //Checkout https://resend.com/ to get your own API key.
-    const resend = new Resend("re_GzJDmg8s_Q9mTRJbtnHBi26rfZwRXGqgJ");
+
     const data = await req.json();
 
     const emailTo = data.email;
+    const code = data.code;
 
-    const email = await resend.emails.send({
-        from: 'wekthor@wekthor.com',
-        to: emailTo,
-        subject: 'Hello World',
-        html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
-    });
+    const createNewCode = await createVerificationCode({ verificationCode: code, email: emailTo })
 
-    if (email) {
-        console.log("successfully sent email!", emailTo)
+    if (createNewCode) {
+        const mail = await transporter.sendMail({
+            from: "noreply@wekthor.com",
+            to: emailTo,
+            subject: "Verify your email",
+            text: `This is your verifcation code: ${code}`,
+        })
+        return NextResponse.json(mail)
     } else {
-        console.log("didn't send email!")
+        return NextResponse.json({ status: 500, message: createNewCode })
     }
-    return NextResponse.json(data)
 }

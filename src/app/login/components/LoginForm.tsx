@@ -11,13 +11,9 @@ import Link from "next/link";
 
 /*Basically, as long as you have the form, the two inputs with their refs (useRef) and the submit button, you have all you need to perform the log in flow */
 
-const input_styles = {
+export const input_styles = {
   label: "text-black/50",
-  input: [
-    "bg-transparent",
-    "text-black/90",
-    "placeholder:text-black/50 dark:placeholder:text-black/60",
-  ],
+  input: ["bg-transparent", "text-black/90", "placeholder:text-black/50"],
   innerWrapper: "bg-transparent",
   inputWrapper: [
     "shadow-xl",
