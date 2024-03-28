@@ -1,12 +1,14 @@
 import User, { IUser } from "./models/User";
 import VerificationCode from "./models/VerificationCode";
+import dbConnect from "./mongoose";
 
-//All of these functions are the ones that "talk" with the database. This functions are then consumed in the API routes. They return null if anything goes wrong, this way, it's easier to check and therefore, send notifications to the user to inform that something went wrong.
+//All of these functions are the ones that "talk" with the database. These functions are then consumed in the API routes. They return null if anything goes wrong, this way, it's easier to check and therefore, send notifications to the user to inform that something went wrong.
 
 //They're wrapped int a try/catch block so it's easier to debug if anything goes wrong.
 
-/**This function creates a new user, using the model created in the User.ts mongoose model. If there's a problem creating the user, returns null.*/
+//Added a dbConnect on each try block because MongoDB will disconnect automatically after 30 minutes of initializing the dbConnection. If this happens, then these functions will never be able to talk with the DB.
 
+/**This function creates a new user, using the model created in the User.ts mongoose model. If there's a problem creating the user, returns null.*/
 export async function createUser({
     email,
     password,
@@ -14,8 +16,9 @@ export async function createUser({
     email: string;
     password: string;
 }) {
-    //The new user will only have the email and password as arguments. Name and last name can and should be added later from the account page. The email verification is done later too.
+    //The new user will only have the email and password passed as arguments. Name and last name can and should be added later from the account page. The email verification is done later too.
     try {
+        await dbConnect();
         const newUser = await User.create({
             name: null,
             lastname: null,
@@ -25,6 +28,7 @@ export async function createUser({
             emailVerified: null,
         });
         return newUser;
+
     } catch (e) {
         console.log(e);
         return null;
@@ -32,10 +36,44 @@ export async function createUser({
 
 }
 
+
+/**Returns all users from the DB */
 export async function getAllUsers(): Promise<IUser[] | null> {
     try {
+        await dbConnect();
         const users = await User.find()
         return users;
+    } catch (e) {
+        console.log(e);
+        return null;
+    }
+}
+
+/** Updates the user role */
+export async function updateUserRole(email: string, newRole: string): Promise<IUser | null> {
+    try {
+        await dbConnect();
+        //Documentation https://masteringjs.io/tutorials/mongoose/update
+        const updatedUser = await User.findOneAndUpdate({ email: email },
+            { role: newRole },
+            { new: true }) as unknown as IUser
+        return updatedUser;
+    } catch (e) {
+        console.log(e);
+        return null;
+    }
+}
+
+export async function updateUserPassword(email: string, newPassword: string): Promise<IUser | null> {
+    try {
+
+        await dbConnect();
+        console.log("update user password")
+        //Documentation https://masteringjs.io/tutorials/mongoose/update
+        const updatedUser = await User.findOneAndUpdate({ email: email },
+            { password: newPassword },
+            { new: true }) as unknown as IUser
+        return updatedUser;
     } catch (e) {
         console.log(e);
         return null;
@@ -45,6 +83,7 @@ export async function getAllUsers(): Promise<IUser[] | null> {
 /**This function finds an user by its email,using the model created in the User.ts mongoose model. If it doesn't find an user, returns null.*/
 export async function findUserByEmail(email: string) {
     try {
+        await dbConnect();
         const user = await User.findOne({ email: email });
         return user;
     } catch (e) {
@@ -62,6 +101,7 @@ export async function createVerificationCode({
     email: string;
 }) {
     try {
+        await dbConnect();
         const newVerificationCode = await VerificationCode.create({
             verificationCode: verificationCode,
             email: email,
@@ -83,7 +123,7 @@ export async function verifyEmail({
     codeThatTheUserHas: string;
 }) {
     try {
-
+        await dbConnect();
         const findCode = await VerificationCode.findOne({ email: email });
         if (findCode.verificationCode === codeThatTheUserHas) {
             //Documentation https://masteringjs.io/tutorials/mongoose/update
@@ -114,6 +154,7 @@ export async function updateName({
     email: string;
 }) {
     try {
+        await dbConnect();
         const user = await User.findOneAndUpdate(
             { email: email },
             { name: name, lastname: lastname },

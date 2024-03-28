@@ -10,7 +10,7 @@ async function dbConnect() {
 
     // Create Connection
     let dbConnection: Promise<Mongoose>;
-    const options: ConnectOptions = { dbName: "wekthor" };
+    const options: ConnectOptions = {};
 
     if (process.env.NODE_ENV === "development") {
         // In development mode, use a global variable so that the value
@@ -23,7 +23,7 @@ async function dbConnect() {
     } else {
         // In production mode, it's best to not use a global variable.
         dbConnection = mongoose.connect(uri, options);
-        console.log("Db connection", await dbConnection)
+
     }
 }
 

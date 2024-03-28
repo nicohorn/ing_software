@@ -27,26 +27,31 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // Add logic here to look up the user from the credentials supplied.
-        await dbConnect();
+        try {
+          await dbConnect();
+          const user = await User.findOne({ email: credentials?.email });
 
-        const user = await User.findOne({ email: credentials?.email });
+          if (!user) {
+            // User not found, return null to display a notification
+            return null;
+          }
 
-        //Check password against hashed password from DB.
-        const passwordCheck = await verifyHashScrypt(
-          credentials?.password!,
-          user.password
-        );
+          const passwordCheck = await verifyHashScrypt(
+            credentials?.password!,
+            user.password
+          );
 
-        if (passwordCheck) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-
-          throw new Error("Couldn't sign in");
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+          if (passwordCheck) {
+            // Successful login, return the user object
+            return user;
+          } else {
+            // Incorrect password, return null to display a notification
+            return null;
+          }
+        } catch (error) {
+          console.error("Error during sign-in:", error);
+          // Return null to display a notification
+          return null;
         }
       },
     }),

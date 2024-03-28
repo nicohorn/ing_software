@@ -2,7 +2,7 @@
 "use client";
 //Since this component makes use of event handlers, it needs to be converted to client component using the "use client" directive.
 import React, { useRef, useState } from "react";
-import { Card, CardBody, Button, Input } from "@nextui-org/react";
+import { Card, CardBody, Button, Input, Spinner } from "@nextui-org/react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -32,8 +32,12 @@ export const input_styles = {
 export default function LoginForm() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
   const [invalidCredentials, setInvalidCredentials] = useState(false);
+
+  const router = useRouter();
+
+  const [loading, setLoading] = useState(false);
+
   return (
     <div>
       <h1 className="font-bold text-2xl ml-2 mb-2">Log in</h1>
@@ -41,20 +45,25 @@ export default function LoginForm() {
         <CardBody className="text-black flex flex-col gap-4">
           <form
             onSubmit={async (e) => {
+              setLoading(true);
               /*Once the user clicks on the log in button, this event will fire. I'm using the signIn function provided by next-auth*/
               e.preventDefault();
               const res = await signIn("credentials", {
                 email: emailRef.current?.value,
                 password: passwordRef.current?.value,
-                callbackUrl: "/account",
+                redirect: false,
               });
 
               if ((res && res.status !== 200) || (res && res.error)) {
                 setInvalidCredentials(true);
+                setLoading(false);
                 setTimeout(() => {
                   setInvalidCredentials(false);
                 }, 8000);
               }
+
+              router.push("/account");
+              router.refresh();
             }}
             className="flex flex-col gap-3"
           >
@@ -77,7 +86,7 @@ export default function LoginForm() {
               type="submit"
               color="success"
             >
-              Log in
+              {loading ? <Spinner color="white" size="sm" /> : "Log in"}
             </Button>
             {invalidCredentials && (
               <p className="animate-pulse">Invalid credentials, try again</p>

@@ -1,8 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { input_styles } from "@/app/login/components/LoginForm";
 import { IUser } from "@/models/User";
 import {
+  Accordion,
+  AccordionItem,
   Button,
   Card,
   CardBody,
@@ -51,6 +54,25 @@ async function updateName({
 
   return await res.json();
 }
+/**This function is responsible for updating the user's password */
+async function updatePassword({
+  newPassword,
+  oldPassword,
+  email,
+}: {
+  newPassword: string;
+  oldPassword: string;
+  email: string;
+}) {
+  // Make a PATCH request to the /api/user/update_name API endpoint
+  const res = await fetch("/api/user/update_password", {
+    method: "PATCH",
+    mode: "cors",
+    body: JSON.stringify({ newPassword, oldPassword, email }),
+  });
+
+  return await res.json();
+}
 
 export const UserDetails = ({ user }: { user: IUser }) => {
   const router = useRouter();
@@ -61,6 +83,12 @@ export const UserDetails = ({ user }: { user: IUser }) => {
   const nameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const verifcationCodeRef = useRef<HTMLInputElement>(null);
+
+  const oldPasswordRef = useRef<HTMLInputElement>(null);
+  const newPasswordRef = useRef<HTMLInputElement>(null);
+  const repeatedNewPasswordRef = useRef<HTMLInputElement>(null);
+
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   const [loading, setLoading] = useState(false);
 
@@ -158,6 +186,89 @@ export const UserDetails = ({ user }: { user: IUser }) => {
           </div>{" "}
         </CardBody>
       </Card>
+      <Card className="bg-red-400 md:max-w-96 w-[95vw] shadow-lg">
+        <CardBody>
+          <Accordion>
+            <AccordionItem
+              isCompact
+              className="text-xs w-full   rounded-xl font-bold"
+              title="Change password"
+            >
+              <form
+                onSubmit={async (e) => {
+                  setLoading(true);
+                  e.preventDefault();
+                  const oldPassword = oldPasswordRef.current?.value;
+                  const newPassword = newPasswordRef.current?.value;
+                  const repeatedNewPassword =
+                    repeatedNewPasswordRef.current?.value;
+
+                  if (newPassword === repeatedNewPassword) {
+                    const res = await updatePassword({
+                      oldPassword: oldPassword!,
+                      newPassword: newPassword!,
+                      email: user.email,
+                    });
+
+                    console.log(res);
+
+                    if (res.status === 200) {
+                      setLoading(false);
+                    }
+                  } else {
+                    setLoading(false);
+                    setPasswordsMatch(false);
+                    setTimeout(() => {
+                      setPasswordsMatch(true);
+                    }, 8000);
+                  }
+                }}
+                className="flex flex-col gap-4"
+              >
+                <Input
+                  size="sm"
+                  ref={oldPasswordRef}
+                  className="text-sm"
+                  classNames={input_styles}
+                  type="password"
+                  label="Current password"
+                  variant="flat"
+                ></Input>{" "}
+                <Input
+                  size="sm"
+                  ref={newPasswordRef}
+                  className="text-sm"
+                  classNames={input_styles}
+                  type="password"
+                  label="New password"
+                  variant="flat"
+                ></Input>{" "}
+                <Input
+                  size="sm"
+                  ref={repeatedNewPasswordRef}
+                  className="text-sm"
+                  classNames={input_styles}
+                  type="password"
+                  label="Repeat new password"
+                  variant="flat"
+                ></Input>
+                {!passwordsMatch && (
+                  <p className="animate-pulse">
+                    Passwords don't match, try again
+                  </p>
+                )}
+                <Button className="self-end shadow-lg" type="submit">
+                  {loading ? (
+                    <Spinner color="primary" size="sm" />
+                  ) : (
+                    "Save changes"
+                  )}
+                </Button>
+              </form>
+            </AccordionItem>
+          </Accordion>
+        </CardBody>
+      </Card>
       <Button
         className="w-fit shadow-lg"
         onClick={() => {
@@ -207,14 +318,14 @@ export const UserDetails = ({ user }: { user: IUser }) => {
                     classNames={input_styles}
                     type="text"
                     label="Name"
-                    variant="bordered"
+                    variant="flat"
                   ></Input>
                   <Input
                     ref={lastNameRef}
                     classNames={input_styles}
                     type="text"
-                    label="Lastname"
-                    variant="bordered"
+                    label="Last name"
+                    variant="flat"
                   ></Input>
                 </form>
               </ModalBody>
