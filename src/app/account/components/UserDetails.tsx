@@ -25,6 +25,8 @@ import { SessionProvider, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 
+//DISCLAIMER. This is a huge component, I could break it up in smaller components for easier readability, but sincer I wanted to deliver the project to you as soon as possible, I left it like this.
+
 /**This function is responsible for verifying the user's email address */
 async function verifyEmail({ email, code }: { email: string; code: string }) {
   // Make a PATCH request to the /api/user/verify_email API endpoint
