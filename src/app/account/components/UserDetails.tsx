@@ -48,7 +48,7 @@ async function updateName({
   return await res.json();
 }
 
-function UserDetails({ user }: { user: IUser }) {
+export const UserDetails = ({ user }: { user: IUser }) => {
   //Next Auth hook to get the session (client side);
   const { data: session } = useSession();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -77,7 +77,7 @@ function UserDetails({ user }: { user: IUser }) {
           <div>
             <p className="text-xs">Name</p>
             <div className="font-bold">
-              {session.user.name ? (
+              {user.name ? (
                 <div className="flex justify-between items-center">
                   <p>
                     {user.name} {user.lastname}
@@ -102,7 +102,7 @@ function UserDetails({ user }: { user: IUser }) {
             </div>
           </div>
           <Divider />
-          {session?.user?.emailVerified ? (
+          {user.emailVerified ? (
             <>
               <div>
                 <p className="text-xs">Email verified</p>
@@ -179,7 +179,7 @@ function UserDetails({ user }: { user: IUser }) {
                       const res = await updateName({
                         name: name,
                         lastname: lastname,
-                        email: session.user.email,
+                        email: user.email,
                       });
                       console.log(res);
                     }
@@ -215,7 +215,7 @@ function UserDetails({ user }: { user: IUser }) {
       </Modal>
     </div>
   );
-}
+};
 
 export default function UserDetailsComponent({ user }: { user: IUser }) {
   return (

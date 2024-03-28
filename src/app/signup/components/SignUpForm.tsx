@@ -1,7 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 import { input_styles } from "@/app/login/components/LoginForm";
+import { createHashScrypt } from "@/utils/hash";
 import { Button, Card, CardBody, Input } from "@nextui-org/react";
+import { createHash } from "crypto";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
