@@ -5,6 +5,7 @@ import { createHashScrypt } from "@/utils/hash";
 import { Button, Card, CardBody, Input } from "@nextui-org/react";
 import { createHash } from "crypto";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 
@@ -50,7 +51,6 @@ export default function SignUpForm() {
                 }, 8000);
                 return;
               } else {
-                console.log("Succesfully registered");
                 const newUser = await createNewUser({
                   email: email!,
                   password: password!,
@@ -112,7 +112,9 @@ export default function SignUpForm() {
               <p className="animate-pulse">Passwords don't match</p>
             )}
           </form>
-          <p className="text-xs ml-1">Forgot your password? Click here.</p>
+          <Link href="/login" className="text-xs ml-1">
+            Already have an account? Log in here.
+          </Link>
         </CardBody>
       </Card>
     </div>

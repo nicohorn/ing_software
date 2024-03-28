@@ -17,19 +17,22 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { IconCheck, IconLogout } from "@tabler/icons-react";
-import { User } from "next-auth";
 import { SessionProvider, signOut, useSession } from "next-auth/react";
-import React, { useRef } from "react";
+import { useRouter } from "next/navigation";
+import React, { useRef, useState } from "react";
 
+/**This function is responsible for verifying the user's email address */
 async function verifyEmail({ email, code }: { email: string; code: string }) {
+  // Make a PATCH request to the /api/user/verify_email API endpoint
   const res = await fetch("/api/user/verify_email", {
-    method: "POST",
+    method: "PATCH",
     mode: "cors",
     body: JSON.stringify({ email, code }),
   });
   return await res.json();
 }
 
+/**This function is responsible for updating the user's name */
 async function updateName({
   name,
   lastname,
@@ -39,6 +42,7 @@ async function updateName({
   lastname: string;
   email: string;
 }) {
+  // Make a PATCH request to the /api/user/update_name API endpoint
   const res = await fetch("/api/user/update_name", {
     method: "PATCH",
     mode: "cors",
@@ -49,12 +53,16 @@ async function updateName({
 }
 
 export const UserDetails = ({ user }: { user: IUser }) => {
+  const router = useRouter();
+
   //Next Auth hook to get the session (client side);
   const { data: session } = useSession();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const nameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const verifcationCodeRef = useRef<HTMLInputElement>(null);
+
+  const [loading, setLoading] = useState(false);
 
   //Show a spinner while the session "loads" (sometimes it gets stuck for a few moments, so it't good that the user sees that it's loading).
   if (!session)
@@ -71,13 +79,13 @@ export const UserDetails = ({ user }: { user: IUser }) => {
         <CardBody className="text-black flex flex-col gap-4">
           <div>
             <p className="text-xs">Email</p>
-            <div className="font-bold">{user.email}</div>
+            <div className="font-bold">{user?.email}</div>
           </div>
           <Divider />
           <div>
             <p className="text-xs">Name</p>
             <div className="font-bold">
-              {user.name ? (
+              {user?.name ? (
                 <div className="flex justify-between items-center">
                   <p>
                     {user.name} {user.lastname}
@@ -102,7 +110,7 @@ export const UserDetails = ({ user }: { user: IUser }) => {
             </div>
           </div>
           <Divider />
-          {user.emailVerified ? (
+          {user?.emailVerified ? (
             <>
               <div>
                 <p className="text-xs">Email verified</p>
@@ -127,12 +135,13 @@ export const UserDetails = ({ user }: { user: IUser }) => {
                 ></Input>
                 <Button
                   onClick={async () => {
+                    // Get the value from the verifcationCodeRef input field
                     const code = verifcationCodeRef.current?.value;
+                    // Call the verifyEmail function with the user's email from the session and the provided code
                     const res = await verifyEmail({
-                      email: session.user.email,
-                      code: code!,
+                      email: session.user.email, // Use the email from the current session
+                      code: code!, // Pass the code value
                     });
-                    console.log(res);
                   }}
                   size="sm"
                   className="w-full shadow-md"
@@ -145,7 +154,7 @@ export const UserDetails = ({ user }: { user: IUser }) => {
           )}
           <div>
             <p className="text-xs">Role</p>
-            <div className="font-bold">{session?.user?.role}</div>
+            <div className="font-bold">{user?.role}</div>
           </div>{" "}
         </CardBody>
       </Card>
@@ -171,17 +180,25 @@ export const UserDetails = ({ user }: { user: IUser }) => {
                   className="flex flex-col gap-5"
                   onSubmit={async (e) => {
                     e.preventDefault();
-                    const name = nameRef.current?.value!;
-                    const lastname = lastNameRef.current?.value!;
+                    const name = nameRef.current?.value!; // Get the value of the name input field
+                    const lastname = lastNameRef.current?.value!; // Get the value of the lastname input field
 
                     //Validate that the name and lastname inputs are not empty
                     if (name.length > 1 && lastname.length > 1) {
                       const res = await updateName({
-                        name: name,
-                        lastname: lastname,
-                        email: user.email,
+                        name: name, // Pass the name value to the updateName function
+                        lastname: lastname, // Pass the lastname value to the updateName function
+                        email: user.email, // Pass the user's email to the updateName function
                       });
-                      console.log(res);
+
+                      // If the updateName function returns a truthy value
+                      res && router.refresh(); // Refresh the router (update the UI)
+
+                      // After a 1 second delay
+                      setTimeout(() => {
+                        setLoading(false); // Set the loading state to false
+                        onClose(); // Close the modal
+                      }, 1000);
                     }
                   }}
                 >
@@ -205,8 +222,15 @@ export const UserDetails = ({ user }: { user: IUser }) => {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button form="name_edit_form" type="submit" color="primary">
-                  Save
+                <Button
+                  onClick={() => {
+                    setLoading(true);
+                  }}
+                  form="name_edit_form"
+                  type="submit"
+                  color="primary"
+                >
+                  {loading ? <Spinner color="white" size="sm" /> : "Save"}
                 </Button>
               </ModalFooter>
             </>

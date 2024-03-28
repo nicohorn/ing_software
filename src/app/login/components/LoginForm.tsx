@@ -46,19 +46,14 @@ export default function LoginForm() {
               const res = await signIn("credentials", {
                 email: emailRef.current?.value,
                 password: passwordRef.current?.value,
-                redirect: false,
+                callbackUrl: "/account",
               });
 
               if ((res && res.status !== 200) || (res && res.error)) {
-                console.log("Credenciales inválidas");
                 setInvalidCredentials(true);
                 setTimeout(() => {
                   setInvalidCredentials(false);
                 }, 8000);
-              } else {
-                console.log("Se inició sesión con éxito");
-                router.push("/about");
-                router.refresh();
               }
             }}
             className="flex flex-col gap-3"

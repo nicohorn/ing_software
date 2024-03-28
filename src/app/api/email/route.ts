@@ -10,23 +10,25 @@ let transporter = nodemailer.createTransport({
   secure: true,
   auth: {
     type: "OAuth2",
-    user: process.env.NEXT_PUBLIC_GMAIL_USER, //Your gmail
-    clientId: process.env.OAUTH_CLIENTID,
-    clientSecret: process.env.OAUTH_CLIENT_SECRET,
-    refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+    user: process.env.NEXT_PUBLIC_GMAIL_USER, // Your Gmail email address
+    clientId: process.env.OAUTH_CLIENTID, // Your OAuth2 client ID
+    clientSecret: process.env.OAUTH_CLIENT_SECRET, // Your OAuth2 client secret
+    refreshToken: process.env.OAUTH_REFRESH_TOKEN, // Your OAuth2 refresh token
   },
 });
 export async function POST(req: NextRequest) {
-  const data = await req.json();
 
-  const emailTo = data.email;
-  const code = data.code;
+  const data = await req.json(); // Parse the request body as JSON
+  const emailTo = data.email; // Extract the email address from the request body
+  const code = data.code; // Extract the verification code from the request body
 
+  // Call the createVerificationCode function with the provided verification code and email
   const createNewCode = await createVerificationCode({
     verificationCode: code,
     email: emailTo,
   });
 
+  // If the createVerificationCode function returns a truthy value
   if (createNewCode) {
     const mail = await transporter.sendMail({
       from: "Wekthor <noreply@wekthor.com>",
@@ -37,6 +39,8 @@ export async function POST(req: NextRequest) {
     });
     return NextResponse.json(mail);
   } else {
-    return NextResponse.json({ status: 500, message: createNewCode });
+    // If the createVerificationCode function returns a falsy value
+    // Return a JSON response with an error status and message
+    return NextResponse.json({ status: 500, message: "Failed to create the verification code" });
   }
 }
