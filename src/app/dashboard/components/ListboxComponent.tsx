@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Select, SelectItem } from "@nextui-org/react";
+import { Notification } from "@/app/components/Notification";
 
 export default function SelectComponent({
   options,
@@ -21,6 +22,14 @@ export default function SelectComponent({
             mode: "cors",
             body: JSON.stringify({ email: data.email, role: e.target.value }),
           });
+          if (res.status !== 500) {
+            new Notification().renderNotification({
+              title: "Updated user role",
+              type: "success",
+              description: "The user role was successfully updated",
+              seconds: 2,
+            });
+          }
         }}
         aria-label="User role selector"
         placeholder={placeholder}

@@ -49,6 +49,8 @@ export default async function RootLayout({
       >
         <Navbar session={session} links={links} />
         {children}
+        {/* The notification component will target this div to render the notifications */}
+        <div id="notifications_container" className="relative" />
       </body>
     </html>
   );

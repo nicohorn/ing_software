@@ -1,0 +1,75 @@
+Date : 2024-03-28 17:48:51
+Directory : c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src
+Total : 23 files,  534 codes, 62 comments, 62 blanks, all 658 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript JSX |         10 |        335 |         26 |         34 |        395 |
+| TypeScript     |         13 |        199 |         36 |         28 |        263 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                       | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                          |         23 |        534 |         62 |         62 |        658 |
+| . (Files)                                                                                                  |          3 |        113 |         16 |         10 |        139 |
+| app                                                                                                        |         18 |        400 |         46 |         51 |        497 |
+| app (Files)                                                                                                |          1 |          1 |          1 |          0 |          2 |
+| app\account                                                                                                |          2 |        166 |         23 |         15 |        204 |
+| app\account (Files)                                                                                        |          1 |          1 |          0 |          1 |          2 |
+| app\account\components                                                                                     |          1 |        165 |         23 |         14 |        202 |
+| app\api                                                                                                    |          8 |         65 |         20 |         17 |        102 |
+| app\api\auth                                                                                               |          1 |         13 |          0 |         -2 |         11 |
+| app\api\auth\[...nextauth]                                                                                 |          1 |         13 |          0 |         -2 |         11 |
+| app\api\email                                                                                              |          1 |          4 |          4 |         -2 |          6 |
+| app\api\user                                                                                               |          6 |         48 |         16 |         21 |         85 |
+| app\api\user (Files)                                                                                       |          1 |          5 |          2 |         -2 |          5 |
+| app\api\user\[email]                                                                                       |          1 |         14 |          5 |          5 |         24 |
+| app\api\user\update_name                                                                                   |          1 |          0 |          2 |          0 |          2 |
+| app\api\user\update_password                                                                               |          1 |         18 |          1 |         12 |         31 |
+| app\api\user\update_role                                                                                   |          1 |         11 |          1 |          6 |         18 |
+| app\api\user\verify_email                                                                                  |          1 |          0 |          5 |          0 |          5 |
+| app\components                                                                                             |          1 |         71 |          0 |          9 |         80 |
+| app\dashboard                                                                                              |          4 |         93 |          2 |          6 |        101 |
+| app\dashboard (Files)                                                                                      |          1 |          4 |          1 |          0 |          5 |
+| app\dashboard\components                                                                                   |          3 |         89 |          1 |          6 |         96 |
+| app\login                                                                                                  |          1 |          0 |          0 |          4 |          4 |
+| app\login\components                                                                                       |          1 |          0 |          0 |          4 |          4 |
+| app\signup                                                                                                 |          1 |          4 |          0 |          0 |          4 |
+| app\signup\components                                                                                      |          1 |          4 |          0 |          0 |          4 |
+| models                                                                                                     |          1 |          9 |          0 |          2 |         11 |
+| utils                                                                                                      |          1 |         12 |          0 |         -1 |         11 |
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                   | language       | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\components\UserDetails.tsx        | TypeScript JSX |        165 |         23 |         14 |        202 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\page.tsx                          | TypeScript JSX |          1 |          0 |          1 |          2 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\auth\[...nextauth]\authOptions.ts     | TypeScript     |         13 |          0 |         -2 |         11 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\email\route.ts                        | TypeScript     |          4 |          4 |         -2 |          6 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\[email]\route.ts                 | TypeScript     |         14 |          5 |          5 |         24 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\route.ts                         | TypeScript     |          5 |          2 |         -2 |          5 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_name\route.ts             | TypeScript     |          0 |          2 |          0 |          2 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_password\route.ts         | TypeScript     |         18 |          1 |         12 |         31 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_role\route.ts             | TypeScript     |         11 |          1 |          6 |         18 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\verify_email\route.ts            | TypeScript     |          0 |          5 |          0 |          5 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\components\Notification.tsx               | TypeScript JSX |         71 |          0 |          9 |         80 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\components\ListboxComponent.tsx | TypeScript JSX |         39 |          1 |          2 |         42 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\components\UserRow.tsx          | TypeScript JSX |         31 |          0 |          2 |         33 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\components\UsersList.tsx        | TypeScript JSX |         19 |          0 |          2 |         21 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\page.tsx                        | TypeScript JSX |          4 |          1 |          0 |          5 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\layout.tsx                                | TypeScript JSX |          1 |          1 |          0 |          2 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\login\components\LoginForm.tsx            | TypeScript JSX |          0 |          0 |          4 |          4 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\signup\components\SignUpForm.tsx          | TypeScript JSX |          4 |          0 |          0 |          4 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\index.ts                                      | TypeScript     |         95 |         10 |          3 |        108 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\middleware.ts                                 | TypeScript     |         18 |          6 |          5 |         29 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\models\User.ts                                | TypeScript     |          9 |          0 |          2 |         11 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\mongoose.ts                                   | TypeScript     |          0 |          0 |          2 |          2 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\utils\hash.ts                                 | TypeScript     |         12 |          0 |         -1 |         11 |
+| Total                                                                                                      |                |        534 |         62 |         62 |        658 |
++------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

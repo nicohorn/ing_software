@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
+import { Notification } from "@/app/components/Notification";
 import { input_styles } from "@/app/login/components/LoginForm";
 import { IUser } from "@/models/User";
 import {
@@ -90,7 +91,8 @@ export const UserDetails = ({ user }: { user: IUser }) => {
 
   const [passwordsMatch, setPasswordsMatch] = useState(true);
 
-  const [loading, setLoading] = useState(false);
+  const [loadingPassword, setLoadingPassword] = useState(false);
+  const [loadingName, setLoadingName] = useState(false);
 
   //Show a spinner while the session "loads" (sometimes it gets stuck for a few moments, so it't good that the user sees that it's loading).
   if (!session)
@@ -196,28 +198,54 @@ export const UserDetails = ({ user }: { user: IUser }) => {
             >
               <form
                 onSubmit={async (e) => {
-                  setLoading(true);
+                  // Prevent the default form submission behavior
                   e.preventDefault();
+
+                  // Get the values from the input fields
                   const oldPassword = oldPasswordRef.current?.value;
                   const newPassword = newPasswordRef.current?.value;
                   const repeatedNewPassword =
                     repeatedNewPasswordRef.current?.value;
 
+                  // Set the loading state to true to indicate an ongoing operation
+                  setLoadingPassword(true);
+
+                  // Check if the new password and repeated new password match
                   if (newPassword === repeatedNewPassword) {
+                    // If they match, call the updatePassword function with the relevant data
                     const res = await updatePassword({
                       oldPassword: oldPassword!,
                       newPassword: newPassword!,
                       email: user.email,
                     });
-
                     console.log(res);
 
+                    // If the response status is 200 (OK), reset the loading state
                     if (res.status === 200) {
-                      setLoading(false);
+                      setLoadingPassword(false);
+                      new Notification().renderNotification({
+                        type: "success",
+                        title: "Updated user password",
+                        description: "Successfully updated the password",
+                        seconds: 5,
+                      });
+                    } else {
+                      setLoadingPassword(false);
+                      new Notification().renderNotification({
+                        type: "error",
+                        title: "Couldn't update password",
+                        description: "Your current password is incorrect",
+                        seconds: 5,
+                      });
                     }
                   } else {
-                    setLoading(false);
+                    // If the passwords don't match, reset the loading state
+                    setLoadingPassword(false);
+
+                    // Set the passwordsMatch state to false to indicate a mismatch
                     setPasswordsMatch(false);
+
+                    // After 8 seconds, set the passwordsMatch state back to true
                     setTimeout(() => {
                       setPasswordsMatch(true);
                     }, 8000);
@@ -258,7 +286,7 @@ export const UserDetails = ({ user }: { user: IUser }) => {
                   </p>
                 )}
                 <Button className="self-end shadow-lg" type="submit">
-                  {loading ? (
+                  {loadingPassword ? (
                     <Spinner color="primary" size="sm" />
                   ) : (
                     "Save changes"
@@ -303,13 +331,37 @@ export const UserDetails = ({ user }: { user: IUser }) => {
                       });
 
                       // If the updateName function returns a truthy value
-                      res && router.refresh(); // Refresh the router (update the UI)
+                      if (res) {
+                        router.refresh(); // Refresh the router (update the UI)
+                        new Notification().renderNotification({
+                          type: "success",
+                          title: "Updated name",
+                          description: "Your name was successfully updated",
+                          seconds: 5,
+                        });
+                      } else {
+                        new Notification().renderNotification({
+                          type: "error",
+                          title: "An error has occurred",
+                          description: "Couldn't update your name",
+                          seconds: 5,
+                        });
+                      }
 
                       // After a 1 second delay
                       setTimeout(() => {
-                        setLoading(false); // Set the loading state to false
+                        setLoadingName(false); // Set the loading state to false
                         onClose(); // Close the modal
                       }, 1000);
+                    } else {
+                      setLoadingName(false);
+                      new Notification().renderNotification({
+                        type: "info",
+                        title: "Can't be empty",
+                        description:
+                          "The name and the last name can't be empty",
+                        seconds: 5,
+                      });
                     }
                   }}
                 >
@@ -335,13 +387,13 @@ export const UserDetails = ({ user }: { user: IUser }) => {
                 </Button>
                 <Button
                   onClick={() => {
-                    setLoading(true);
+                    setLoadingName(true);
                   }}
                   form="name_edit_form"
                   type="submit"
                   color="primary"
                 >
-                  {loading ? <Spinner color="white" size="sm" /> : "Save"}
+                  {loadingName ? <Spinner color="white" size="sm" /> : "Save"}
                 </Button>
               </ModalFooter>
             </>
@@ -353,6 +405,7 @@ export const UserDetails = ({ user }: { user: IUser }) => {
 };
 
 export default function UserDetailsComponent({ user }: { user: IUser }) {
+  //Since the above component makes use of the session, it must be wrapped into a SessionProvider component
   return (
     <SessionProvider>
       <UserDetails user={user} />

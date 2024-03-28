@@ -12,7 +12,7 @@ export default function UsersList({ users }: { users: IUser[] }) {
         <p className="font-bold w-[25%]">Email verified</p>
         <p className="font-bold w-[25%]">Role</p>
       </div>
-      {users?.map((user, idx) => {
+      {users?.map((user) => {
         return <UserRow key={user.email} user={user} />;
       })}
     </div>
