@@ -174,6 +174,24 @@ export const UserDetails = ({ user }: { user: IUser }) => {
                       email: session.user.email, // Use the email from the current session
                       code: code!, // Pass the code value
                     });
+
+                    if (res.status === 200) {
+                      new Notification().renderNotification({
+                        type: "success",
+                        title: "Verified email",
+                        description:
+                          "You're all set! Your email has been verified",
+                        seconds: 5,
+                      });
+                      router.refresh();
+                    } else {
+                      new Notification().renderNotification({
+                        type: "error",
+                        title: "Couldn't verify email",
+                        description: "Invalid code, please try again.",
+                        seconds: 5,
+                      });
+                    }
                   }}
                   size="sm"
                   className="w-full shadow-md"
