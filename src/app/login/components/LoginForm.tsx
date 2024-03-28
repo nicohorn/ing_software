@@ -60,10 +60,10 @@ export default function LoginForm() {
                 setTimeout(() => {
                   setInvalidCredentials(false);
                 }, 8000);
+              } else {
+                router.push("/account");
+                router.refresh();
               }
-
-              router.push("/account");
-              router.refresh();
             }}
             className="flex flex-col gap-3"
           >
