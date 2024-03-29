@@ -3,7 +3,6 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/authOptions";
-import { IconLogin } from "@tabler/icons-react";
 
 const raleway = Raleway({
   subsets: ["latin"],

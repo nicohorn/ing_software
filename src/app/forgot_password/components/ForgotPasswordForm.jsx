@@ -43,8 +43,10 @@ export default function ForgotPasswordForm() {
 
       {/* Form container */}
       <div className="md:max-w-96 w-[95vw] bg-primary rounded-lg shadow-lg p-6">
+        <p className="text-xs text-white mb-1">Enter your email</p>
         <div className="text-black flex flex-col gap-4">
           {/* Form */}
+
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             {/* Email input field */}
             <input

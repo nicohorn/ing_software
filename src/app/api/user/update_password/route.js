@@ -1,5 +1,5 @@
 import { findUserByEmail, updateUserPassword } from "@/index";
-import { createHashScrypt, verifyHashScrypt } from "@/utils/hash";
+import { createHashBcrypt, verifyHashBcrypt } from "@/utils/hash";
 import { NextResponse } from "next/server";
 
 
@@ -9,14 +9,14 @@ export async function PATCH(req) {
 
     const oldPassword = data.oldPassword
     const user = await findUserByEmail(data.email);
-    const passwordCheck = await verifyHashScrypt(oldPassword, user.password)
+    const passwordCheck = await verifyHashBcrypt(oldPassword, user.password)
 
     if (!passwordCheck) {
         return NextResponse.json({ status: 500, message: "Passwords don't match" })
     }
 
 
-    const hashedPassword = await createHashScrypt(data.newPassword);
+    const hashedPassword = await createHashBcrypt(data.newPassword);
 
     // Call mongoose function to update the user's password 
     const updatedUser = await updateUserPassword(data.email, hashedPassword)

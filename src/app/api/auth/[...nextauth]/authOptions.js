@@ -3,7 +3,7 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/mongo_client";
 import User from "@/models/User";
 import dbConnect from "@/mongoose";
-import { verifyHashScrypt } from "@/utils/hash";
+import { verifyHashBcrypt } from "@/utils/hash";
 
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
@@ -33,7 +33,7 @@ export const authOptions = {
             return null;
           }
 
-          const passwordCheck = await verifyHashScrypt(
+          const passwordCheck = await verifyHashBcrypt(
             credentials?.password,
             user.password
           );
