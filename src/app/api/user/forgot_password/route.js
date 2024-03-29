@@ -1,6 +1,8 @@
 import { findUserByEmail } from "@/index";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import { transporter } from "../../email/route";
+import { createPasswordRecoveryToken } from "@/index"
 
 const JWT_SECRET = process.env.NEXTAUTH_SECRET; // I'm using the same secret as the one I'm using in Next Auth
 
@@ -27,8 +29,23 @@ export async function POST(req) {
         const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' });
         const resetLink = `${process.env.NEXTAUTH_URL}/forgot_password/${token}`;
 
-        // Send the reset link to the user's email (you'll need to implement the email sending logic)
-        await sendResetEmail(user.email, resetLink);
+        //Create a new token in the DB
+        console.log(token)
+        const newToken = await createPasswordRecoveryToken({ passwordRecoveryToken: token, email: email })
+
+        if (newToken) {
+            //Send an email with the link
+            await transporter.sendMail({
+                from: "Wekthor <noreply@wekthor.com>",
+                sender: "noreply@wekthor.com",
+                to: email,
+                subject: "Password recovery",
+
+                html: `Click this link to recover your password: <a href="${resetLink}">Recover password</a> <br/>If you didn't request a password change, ignore this email.`,
+            });
+        } else {
+            NextResponse.json({ status: 500, message: "Error creating token" })
+        }
 
         return NextResponse.json({ status: 200, message: "Success" });
     }

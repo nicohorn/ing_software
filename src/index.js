@@ -1,3 +1,4 @@
+import PasswordRecoverToken from "./models/PasswordRecoverToken";
 import User from "./models/User";
 import VerificationCode from "./models/VerificationCode";
 import dbConnect from "./mongoose";
@@ -184,7 +185,7 @@ async function verifyEmail({ email, codeThatTheUserHas }) {
  * @param {string} userData.email - The email of the user to update.
  * @returns {Promise<User|null>} The updated user or null if an error occurs.
  */
-async function updateName({ name, lastname, email }) {
+async function updateUserName({ name, lastname, email }) {
     try {
         await dbConnect();
         const user = await User.findOneAndUpdate(
@@ -199,6 +200,66 @@ async function updateName({ name, lastname, email }) {
     }
 }
 
+
+/**
+ * Creates a new password recovery token.
+ * @async
+ * @param {Object} options - The options for creating the password recovery token.
+ * @param {string} options.passwordRecoveryToken - The password recovery token.
+ * @param {string} options.email - The email associated with the password recovery token.
+ * @returns {Promise<Object|null>} The newly created password recovery token or null if an error occurs.
+ */
+async function createPasswordRecoveryToken({ passwordRecoveryToken, email }) {
+    try {
+        // Connect to the database
+        await dbConnect();
+
+        /**
+         * Create a new password recovery token.
+         * @type {Object}
+         * @property {string} token - The password recovery token.
+         * @property {string} email - The email associated with the password recovery token.
+         * @property {Date} createdAt - The timestamp when the token was created.
+         */
+        const newPasswordRecoveryToken = await PasswordRecoverToken.create({
+            token: passwordRecoveryToken,
+            email: email,
+            createdAt: new Date(),
+        });
+
+        return newPasswordRecoveryToken;
+    } catch (e) {
+        // Log any errors that occur
+        console.log(e);
+        return null;
+    }
+}
+
+/**
+ * Finds a password recovery token by email.
+ * @async
+ * @param {string} email - The email to search for.
+ * @returns {Promise<Object|null>} The found password recovery token or null if not found or an error occurs.
+ */
+async function findTokenByEmail(email) {
+    try {
+        // Connect to the database
+        await dbConnect();
+
+        /**
+         * Find a password recovery token by email.
+         * @type {Object}
+         */
+        const passwordRecoveryToken = await PasswordRecoverToken.findOne({ email: email });
+
+        return passwordRecoveryToken;
+    } catch (e) {
+        // Log any errors that occur
+        console.log(e);
+        return null;
+    }
+}
+
 module.exports = {
     createUser,
     getAllUsers,
@@ -207,5 +268,7 @@ module.exports = {
     findUserByEmail,
     createVerificationCode,
     verifyEmail,
-    updateName,
+    updateUserName,
+    createPasswordRecoveryToken,
+    findTokenByEmail
 };

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Notification } from "@/app/components/Notification";
 
-export default function ForgotPasswordForm() {
+export default function ForgotPasswordEmailForm() {
   // State variable to store the email input value
   const [email, setEmail] = useState("");
 
@@ -19,21 +19,11 @@ export default function ForgotPasswordForm() {
     });
 
     // Send a POST request to the server with the email address
-    const res = await fetch(`/api/user/forgot_password`, {
+    return await fetch(`/api/user/forgot_password`, {
       method: "POST",
       mode: "cors",
       body: JSON.stringify({ email }),
     });
-
-    // Handle the response from the server
-    if ((res && res.status !== 200) || (res && res.error)) {
-      setInvalidCredentials(true);
-      setTimeout(() => {
-        setInvalidCredentials(false);
-      }, 8000);
-    } else {
-      console.log(res);
-    }
   };
 
   return (

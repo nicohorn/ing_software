@@ -10,11 +10,7 @@ export default function UserRow({ user }) {
     >
       <p className="w-[25%]">{user.email}</p>
       <p className="w-[25%]">
-        {user.emailVerified ? (
-          <IconCheck className="drop-shadow-md" />
-        ) : (
-          <IconX className="drop-shadow-md" />
-        )}
+        {user.name} {user.lastname}
       </p>
       <div className="w-[25%] drop-shadow-md flex gap-2 relative">
         <ListboxComponent

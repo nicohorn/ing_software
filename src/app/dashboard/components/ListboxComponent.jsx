@@ -29,7 +29,7 @@ export default function SelectComponent({ options, placeholder, data }) {
           }
         }}
         aria-label="User role selector"
-        placeholder={placeholder}
+        defaultValue={placeholder} // Set the default value to the placeholder prop
         className="max-w-xs rounded-md text-black p-1"
       >
         {/* Render the options for the select component */}

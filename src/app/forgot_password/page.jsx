@@ -1,10 +1,10 @@
 import React from "react";
-import ForgotPasswordForm from "./components/ForgotPasswordForm";
+import ForgotPasswordEmailForm from "./components/ForgotPassword_EmailForm";
 
 export default function Page() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-between">
-      <ForgotPasswordForm />
+      <ForgotPasswordEmailForm />
     </div>
   );
 }
