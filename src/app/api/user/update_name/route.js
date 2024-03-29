@@ -10,7 +10,7 @@ export async function PATCH(req) {
 
     // Return a JSON response with the updated user data
 
-    if (updateUser) { return NextResponse.json({ status: 200, data: updatedUser }) }
+    if (updatedUser) { return NextResponse.json({ status: 200, data: updatedUser }) }
     else {
         return NextResponse.json({ status: 500, message: "Error updating name of the user" })
     }
