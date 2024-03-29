@@ -4,7 +4,7 @@ import { createVerificationCode } from "@/index";
 
 //For the mailing part, follow this tutorial: https://www.freecodecamp.org/news/use-nodemailer-to-send-emails-from-your-node-js-server/
 //I had to tweak a bit the auth object but it's working fine like this!
-export let transporter = nodemailer.createTransport({
+let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   secure: true,

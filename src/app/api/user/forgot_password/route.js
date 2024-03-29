@@ -1,10 +1,23 @@
 import { findUserByEmail } from "@/index";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import { transporter } from "../../email/route";
 import { createPasswordRecoveryToken } from "@/index"
+import nodemailer from 'nodemailer';
 
 const JWT_SECRET = process.env.NEXTAUTH_SECRET; // I'm using the same secret as the one I'm using in Next Auth
+
+let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+        type: "OAuth2",
+        user: process.env.NEXT_PUBLIC_GMAIL_USER, // Your Gmail email address
+        clientId: process.env.OAUTH_CLIENTID, // Your OAuth2 client ID
+        clientSecret: process.env.OAUTH_CLIENT_SECRET, // Your OAuth2 client secret
+        refreshToken: process.env.OAUTH_REFRESH_TOKEN, // Your OAuth2 refresh token
+    },
+});
 
 export async function POST(req) {
     const data = await req.json();
