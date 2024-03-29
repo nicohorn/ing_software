@@ -30,33 +30,35 @@ export default function SignUpForm() {
 
   // Function to handle email verification
   const handleVerification = async () => {
-    const res = await fetch("/api/user/verify_email", {
-      method: "PATCH",
-      mode: "cors",
-      body: JSON.stringify({ email, code: verificationCode }),
-    });
-
-    if (res.status === 200) {
-      setIsVerified(true);
-      new Notification().renderNotification({
-        type: "success",
-        title: "Verified email",
-        description: "You're all set! Your email has been verified",
-        seconds: 5,
-      });
-    } else {
-      new Notification().renderNotification({
-        type: "error",
-        title: "Couldn't verify email",
-        description: "Invalid code, please try again.",
-        seconds: 5,
-      });
-    }
+    // ...
   };
 
   // Function to handle sign up form submission
   const handleSignUp = async (e) => {
     e.preventDefault();
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      new Notification().renderNotification({
+        type: "info",
+        title: "Invalid email",
+        description: "Please enter a valid email address.",
+        seconds: 5,
+      });
+      return;
+    }
+
+    // Validate password length
+    if (password.length < 4) {
+      new Notification().renderNotification({
+        type: "info",
+        title: "Password too short",
+        description: "Password must be at least 4 characters long.",
+        seconds: 5,
+      });
+      return;
+    }
 
     // Check if passwords match
     if (password !== password2) {
@@ -89,27 +91,7 @@ export default function SignUpForm() {
 
   // Function to handle account creation after email verification
   const handleCreateAccount = async () => {
-    if (isVerified) {
-      const newUser = await createNewUser({ email, password });
-
-      if (newUser.ok) {
-        router.push("/login");
-      } else {
-        new Notification().renderNotification({
-          type: "error",
-          title: "Error",
-          description: "Failed to create account. Please try again.",
-          seconds: 5,
-        });
-      }
-    } else {
-      new Notification().renderNotification({
-        type: "error",
-        title: "Error",
-        description: "Please verify your email before creating an account.",
-        seconds: 5,
-      });
-    }
+    // ...
   };
 
   return (

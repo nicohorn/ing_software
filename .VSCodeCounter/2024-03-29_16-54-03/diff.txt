@@ -1,0 +1,139 @@
+Date : 2024-03-29 16:54:03
+Directory : c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src
+Total : 74 files,  134 codes, 172 comments, 42 blanks, all 348 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JavaScript JSX |         22 |      1,256 |         98 |        107 |      1,461 |
+| JavaScript     |         18 |        500 |        204 |        122 |        826 |
+| CSS            |          1 |          0 |         -1 |         -1 |         -2 |
+| TypeScript     |         17 |       -479 |        -77 |       -110 |       -666 |
+| TypeScript JSX |         16 |     -1,143 |        -52 |        -76 |     -1,271 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                     | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                        |         74 |        134 |        172 |         42 |        348 |
+| . (Files)                                                                                                                |          8 |         21 |         79 |          3 |        103 |
+| app                                                                                                                      |         58 |        151 |         95 |         46 |        292 |
+| app (Files)                                                                                                              |          5 |        -19 |         -3 |         -2 |        -24 |
+| app\about                                                                                                                |          2 |         -7 |          0 |          0 |         -7 |
+| app\account                                                                                                              |          7 |        -70 |          3 |          1 |        -66 |
+| app\account (Files)                                                                                                      |          2 |         -2 |          2 |          1 |          1 |
+| app\account\components                                                                                                   |          5 |        -68 |          1 |          0 |        -67 |
+| app\api                                                                                                                  |         19 |         38 |         50 |         16 |        104 |
+| app\api\auth                                                                                                             |          4 |         -3 |          0 |          0 |         -3 |
+| app\api\auth\[...nextauth]                                                                                               |          4 |         -3 |          0 |          0 |         -3 |
+| app\api\email                                                                                                            |          2 |          0 |         39 |          6 |         45 |
+| app\api\recover_password                                                                                                 |          1 |         21 |          8 |          6 |         35 |
+| app\api\user                                                                                                             |         12 |         20 |          3 |          4 |         27 |
+| app\api\user (Files)                                                                                                     |          2 |          0 |          0 |          0 |          0 |
+| app\api\user\[email]                                                                                                     |          1 |        -14 |         -5 |         -5 |        -24 |
+| app\api\user\forgot_password                                                                                             |          1 |         35 |          8 |          9 |         52 |
+| app\api\user\update_name                                                                                                 |          2 |          0 |          0 |          0 |          0 |
+| app\api\user\update_password                                                                                             |          2 |          0 |          0 |          0 |          0 |
+| app\api\user\update_role                                                                                                 |          2 |         -1 |          0 |          0 |         -1 |
+| app\api\user\verify_email                                                                                                |          2 |          0 |          0 |          0 |          0 |
+| app\components                                                                                                           |          5 |         13 |         19 |          1 |         33 |
+| app\dashboard                                                                                                            |          8 |         -3 |          3 |          1 |          1 |
+| app\dashboard (Files)                                                                                                    |          2 |          0 |          0 |          0 |          0 |
+| app\dashboard\components                                                                                                 |          6 |         -3 |          3 |          1 |          1 |
+| app\forgot_password                                                                                                      |          4 |        159 |         16 |         24 |        199 |
+| app\forgot_password (Files)                                                                                              |          1 |          9 |          0 |          2 |         11 |
+| app\forgot_password\[token]                                                                                              |          1 |         35 |          0 |          3 |         38 |
+| app\forgot_password\components                                                                                           |          2 |        115 |         16 |         19 |        150 |
+| app\login                                                                                                                |          4 |        -12 |         -5 |         -5 |        -22 |
+| app\login (Files)                                                                                                        |          2 |          0 |          0 |          0 |          0 |
+| app\login\components                                                                                                     |          2 |        -12 |         -5 |         -5 |        -22 |
+| app\signup                                                                                                               |          4 |         52 |         12 |         10 |         74 |
+| app\signup (Files)                                                                                                       |          2 |          0 |          0 |          0 |          0 |
+| app\signup\components                                                                                                    |          2 |         52 |         12 |         10 |         74 |
+| models                                                                                                                   |          5 |          4 |         -1 |          3 |          6 |
+| types                                                                                                                    |          1 |        -19 |         -1 |         -9 |        -29 |
+| utils                                                                                                                    |          2 |        -23 |          0 |         -1 |        -24 |
++--------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                                 | language       | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\about\page.jsx                                          | JavaScript JSX |        118 |          1 |          2 |        121 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\about\page.tsx                                          | TypeScript JSX |       -125 |         -1 |         -2 |       -128 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\components\LogoutButton.jsx                     | JavaScript JSX |         15 |          0 |          2 |         17 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\components\NameEdit.jsx                         | JavaScript JSX |        126 |         19 |          7 |        152 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\components\PasswordChange.jsx                   | JavaScript JSX |        108 |          0 |          7 |        115 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\components\UserDetails.jsx                      | JavaScript JSX |         47 |          8 |          8 |         63 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\components\UserDetails.tsx                      | TypeScript JSX |       -364 |        -26 |        -24 |       -414 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\page.jsx                                        | JavaScript JSX |         10 |          3 |          4 |         17 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\page.tsx                                        | TypeScript JSX |        -12 |         -1 |         -3 |        -16 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\auth\[...nextauth]\authOptions.js                   | JavaScript     |         71 |         14 |          7 |         92 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\auth\[...nextauth]\authOptions.ts                   | TypeScript     |        -74 |        -14 |         -7 |        -95 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\auth\[...nextauth]\route.js                         | JavaScript     |          4 |          1 |          2 |          7 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\auth\[...nextauth]\route.ts                         | TypeScript     |         -4 |         -1 |         -2 |         -7 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\email\route.js                                      | JavaScript     |         36 |         45 |         11 |         92 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\email\route.ts                                      | TypeScript     |        -36 |         -6 |         -5 |        -47 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\recover_password\route.js                           | JavaScript     |         21 |          8 |          6 |         35 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\[email]\route.ts                               | TypeScript     |        -14 |         -5 |         -5 |        -24 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\forgot_password\route.js                       | JavaScript     |         35 |          8 |          9 |         52 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\route.js                                       | JavaScript     |         12 |          2 |          3 |         17 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\route.ts                                       | TypeScript     |        -12 |         -2 |         -3 |        -17 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_name\route.js                           | JavaScript     |          7 |          2 |          4 |         13 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_name\route.ts                           | TypeScript     |         -7 |         -2 |         -4 |        -13 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_password\route.js                       | JavaScript     |         18 |          1 |         12 |         31 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_password\route.ts                       | TypeScript     |        -18 |         -1 |        -12 |        -31 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_role\route.js                           | JavaScript     |         10 |          1 |          6 |         17 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_role\route.ts                           | TypeScript     |        -11 |         -1 |         -6 |        -18 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\verify_email\route.js                          | JavaScript     |         11 |          5 |          6 |         22 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\verify_email\route.ts                          | TypeScript     |        -11 |         -5 |         -6 |        -22 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\components\Navbar.jsx                                   | JavaScript JSX |        113 |         17 |          6 |        136 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\components\Navbar.tsx                                   | TypeScript JSX |        -74 |         -6 |         -3 |        -83 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\components\Notification.jsx                             | JavaScript JSX |         49 |          8 |          9 |         66 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\components\Notification.tsx                             | TypeScript JSX |        -71 |          0 |         -9 |        -80 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\components\Title.tsx                                    | TypeScript JSX |         -4 |          0 |         -2 |         -6 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\components\ListboxComponent.jsx               | JavaScript JSX |         42 |          4 |          3 |         49 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\components\ListboxComponent.tsx               | TypeScript JSX |        -39 |         -1 |         -2 |        -42 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\components\UserRow.jsx                        | JavaScript JSX |         26 |          0 |          2 |         28 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\components\UserRow.tsx                        | TypeScript JSX |        -31 |          0 |         -2 |        -33 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\components\UsersList.jsx                      | JavaScript JSX |         18 |          0 |          2 |         20 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\components\UsersList.tsx                      | TypeScript JSX |        -19 |          0 |         -2 |        -21 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\page.jsx                                      | JavaScript JSX |          8 |          1 |          2 |         11 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\page.tsx                                      | TypeScript JSX |         -8 |         -1 |         -2 |        -11 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\forgot_password\[token]\page.jsx                        | JavaScript JSX |         35 |          0 |          3 |         38 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\forgot_password\components\ForgotPassword_EmailForm.jsx | JavaScript JSX |         46 |          8 |          9 |         63 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\forgot_password\components\ForgotPassword_ResetForm.jsx | JavaScript JSX |         69 |          8 |         10 |         87 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\forgot_password\page.jsx                                | JavaScript JSX |          9 |          0 |          2 |         11 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\globals.css                                             | CSS            |          0 |         -1 |         -1 |         -2 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\layout.jsx                                              | JavaScript JSX |         30 |          2 |          4 |         36 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\layout.tsx                                              | TypeScript JSX |        -49 |         -4 |         -5 |        -58 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\login\components\LoginForm.jsx                          | JavaScript JSX |         76 |          0 |          5 |         81 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\login\components\LoginForm.tsx                          | TypeScript JSX |        -88 |         -5 |        -10 |       -103 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\login\page.jsx                                          | JavaScript JSX |          9 |          0 |          2 |         11 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\login\page.tsx                                          | TypeScript JSX |         -9 |          0 |         -2 |        -11 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\page.jsx                                                | JavaScript JSX |        128 |          2 |          1 |        131 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\page.tsx                                                | TypeScript JSX |       -128 |         -2 |         -1 |       -131 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\signup\components\SignUpForm.jsx                        | JavaScript JSX |        165 |         17 |         15 |        197 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\signup\components\SignUpForm.tsx                        | TypeScript JSX |       -113 |         -5 |         -5 |       -123 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\signup\page.jsx                                         | JavaScript JSX |          9 |          0 |          2 |         11 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\signup\page.tsx                                         | TypeScript JSX |         -9 |          0 |         -2 |        -11 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\index.js                                                    | JavaScript     |        160 |         93 |         21 |        274 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\index.ts                                                    | TypeScript     |       -137 |        -14 |        -18 |       -169 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\middleware.js                                               | JavaScript     |         16 |          6 |          5 |         27 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\middleware.ts                                               | TypeScript     |        -18 |         -6 |         -5 |        -29 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\models\PasswordRecoverToken.js                              | JavaScript     |         16 |          0 |          4 |         20 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\models\User.js                                              | JavaScript     |         27 |          4 |          6 |         37 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\models\User.ts                                              | TypeScript     |        -39 |         -5 |         -7 |        -51 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\models\VerificationCode.js                                  | JavaScript     |         17 |          0 |          4 |         21 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\models\VerificationCode.ts                                  | TypeScript     |        -17 |          0 |         -4 |        -21 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\mongo_client.js                                             | JavaScript     |         11 |          4 |          8 |         23 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\mongo_client.ts                                             | TypeScript     |        -11 |         -4 |         -8 |        -23 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\mongoose.js                                                 | JavaScript     |         18 |          8 |          6 |         32 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\mongoose.ts                                                 | TypeScript     |        -18 |         -8 |         -6 |        -32 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\types\next-auth.d.ts                                        | TypeScript     |        -19 |         -1 |         -9 |        -29 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\utils\hash.js                                               | JavaScript     |         10 |          2 |          2 |         14 |
+| c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\utils\hash.ts                                               | TypeScript     |        -33 |         -2 |         -3 |        -38 |
+| Total                                                                                                                    |                |        134 |        172 |         42 |        348 |
++--------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

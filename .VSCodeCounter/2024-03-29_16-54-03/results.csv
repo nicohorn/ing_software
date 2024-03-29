@@ -1,0 +1,44 @@
+"filename", "language", "JavaScript", "CSS", "JavaScript JSX", "Markdown", "comment", "blank", "total"
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\README.md", "Markdown", 0, 0, 0, 24, 0, 8, 32
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\about\page.jsx", "JavaScript JSX", 0, 0, 118, 0, 1, 2, 121
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\components\LogoutButton.jsx", "JavaScript JSX", 0, 0, 15, 0, 0, 2, 17
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\components\NameEdit.jsx", "JavaScript JSX", 0, 0, 126, 0, 19, 7, 152
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\components\PasswordChange.jsx", "JavaScript JSX", 0, 0, 108, 0, 0, 7, 115
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\components\UserDetails.jsx", "JavaScript JSX", 0, 0, 47, 0, 8, 8, 63
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\account\page.jsx", "JavaScript JSX", 0, 0, 10, 0, 3, 4, 17
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\auth\[...nextauth]\authOptions.js", "JavaScript", 71, 0, 0, 0, 14, 7, 92
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\auth\[...nextauth]\route.js", "JavaScript", 4, 0, 0, 0, 1, 2, 7
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\email\route.js", "JavaScript", 36, 0, 0, 0, 45, 11, 92
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\recover_password\route.js", "JavaScript", 21, 0, 0, 0, 8, 6, 35
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\forgot_password\route.js", "JavaScript", 35, 0, 0, 0, 8, 9, 52
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\route.js", "JavaScript", 12, 0, 0, 0, 2, 3, 17
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_name\route.js", "JavaScript", 7, 0, 0, 0, 2, 4, 13
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_password\route.js", "JavaScript", 18, 0, 0, 0, 1, 12, 31
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\update_role\route.js", "JavaScript", 10, 0, 0, 0, 1, 6, 17
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\api\user\verify_email\route.js", "JavaScript", 11, 0, 0, 0, 5, 6, 22
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\components\Navbar.jsx", "JavaScript JSX", 0, 0, 113, 0, 17, 6, 136
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\components\Notification.jsx", "JavaScript JSX", 0, 0, 49, 0, 8, 9, 66
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\components\ListboxComponent.jsx", "JavaScript JSX", 0, 0, 42, 0, 4, 3, 49
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\components\UserRow.jsx", "JavaScript JSX", 0, 0, 26, 0, 0, 2, 28
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\components\UsersList.jsx", "JavaScript JSX", 0, 0, 18, 0, 0, 2, 20
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\dashboard\page.jsx", "JavaScript JSX", 0, 0, 8, 0, 1, 2, 11
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\forgot_password\[token]\page.jsx", "JavaScript JSX", 0, 0, 35, 0, 0, 3, 38
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\forgot_password\components\ForgotPassword_EmailForm.jsx", "JavaScript JSX", 0, 0, 46, 0, 8, 9, 63
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\forgot_password\components\ForgotPassword_ResetForm.jsx", "JavaScript JSX", 0, 0, 69, 0, 8, 10, 87
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\forgot_password\page.jsx", "JavaScript JSX", 0, 0, 9, 0, 0, 2, 11
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\globals.css", "CSS", 0, 6, 0, 0, 0, 1, 7
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\layout.jsx", "JavaScript JSX", 0, 0, 30, 0, 2, 4, 36
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\login\components\LoginForm.jsx", "JavaScript JSX", 0, 0, 76, 0, 0, 5, 81
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\login\page.jsx", "JavaScript JSX", 0, 0, 9, 0, 0, 2, 11
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\page.jsx", "JavaScript JSX", 0, 0, 128, 0, 2, 1, 131
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\signup\components\SignUpForm.jsx", "JavaScript JSX", 0, 0, 165, 0, 17, 15, 197
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\app\signup\page.jsx", "JavaScript JSX", 0, 0, 9, 0, 0, 2, 11
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\index.js", "JavaScript", 160, 0, 0, 0, 93, 21, 274
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\middleware.js", "JavaScript", 16, 0, 0, 0, 6, 5, 27
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\models\PasswordRecoverToken.js", "JavaScript", 16, 0, 0, 0, 0, 4, 20
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\models\User.js", "JavaScript", 27, 0, 0, 0, 4, 6, 37
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\models\VerificationCode.js", "JavaScript", 17, 0, 0, 0, 0, 4, 21
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\mongo_client.js", "JavaScript", 11, 0, 0, 0, 4, 8, 23
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\mongoose.js", "JavaScript", 18, 0, 0, 0, 8, 6, 32
+"c:\Users\User\Documents\dev\upwork\wekthor-games-webpage\src\utils\hash.js", "JavaScript", 10, 0, 0, 0, 2, 2, 14
+"Total", "-", 500, 6, 1256, 24, 302, 238, 2326

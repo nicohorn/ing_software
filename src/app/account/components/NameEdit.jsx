@@ -13,53 +13,83 @@ export const NameEdit = ({ user }) => {
   const handleNameUpdate = async (e) => {
     e.preventDefault();
 
-    // Check if name and lastname are not empty
-    if (name.trim().length > 1 && lastname.trim().length > 1) {
-      // Send a PATCH request to update the user's name
-      const res = await fetch("/api/user/update_name", {
-        method: "PATCH",
-        mode: "cors",
-        body: JSON.stringify({
-          name: name.trim(),
-          lastname: lastname.trim(),
-          email: user.email,
-        }),
-      });
+    // Trim the name and lastname values
+    const trimmedName = name.trim();
+    const trimmedLastname = lastname.trim();
 
-      // Check if the response is successful
-      if (res) {
-        // Show a success notification
-        new Notification().renderNotification({
-          type: "success",
-          title: "Updated name",
-          description: "Your name was successfully updated",
-          seconds: 5,
-        });
-      } else {
-        // Show an error notification
-        new Notification().renderNotification({
-          type: "error",
-          title: "An error has occurred",
-          description: "Couldn't update your name",
-          seconds: 5,
-        });
-      }
-
-      // Delay for 1 second before closing the modal and resetting the loading state
-      setTimeout(() => {
-        setLoadingName(false);
-        setIsModalOpen(false);
-      }, 1000);
-    } else {
-      // If name or lastname is empty, show an info notification
+    // Validate name and lastname
+    if (trimmedName.length === 0 || trimmedLastname.length === 0) {
       setLoadingName(false);
       new Notification().renderNotification({
         type: "info",
-        title: "Can't be empty",
+        title: "Empty fields",
         description: "The name and the last name can't be empty",
         seconds: 5,
       });
+      return;
     }
+
+    if (trimmedName.length < 3 || trimmedLastname.length < 3) {
+      setLoadingName(false);
+      new Notification().renderNotification({
+        type: "info",
+        title: "Invalid length",
+        description:
+          "The name and the last name must be at least 3 characters long",
+        seconds: 5,
+      });
+      return;
+    }
+
+    // Check if name or lastname contains numbers
+    const containsNumbers =
+      /\d/.test(trimmedName) || /\d/.test(trimmedLastname);
+    if (containsNumbers) {
+      setLoadingName(false);
+      new Notification().renderNotification({
+        type: "info",
+        title: "Invalid characters",
+        description: "The name and the last name can't contain numbers",
+        seconds: 5,
+      });
+      return;
+    }
+
+    // Send a PATCH request to update the user's name
+    const res = await fetch("/api/user/update_name", {
+      method: "PATCH",
+      mode: "cors",
+      body: JSON.stringify({
+        name: trimmedName,
+        lastname: trimmedLastname,
+        email: user.email,
+      }),
+    });
+
+    // Check if the response is successful
+    if (res) {
+      // Show a success notification
+      new Notification().renderNotification({
+        type: "success",
+        title: "Updated name",
+        description: "Your name was successfully updated",
+        seconds: 5,
+      });
+    } else {
+      // Show an error notification
+      new Notification().renderNotification({
+        type: "error",
+        title: "An error has occurred",
+        description: "Couldn't update your name",
+        seconds: 5,
+      });
+    }
+
+    // Delay for 1 second before closing the modal and resetting the loading state
+    setTimeout(() => {
+      setLoadingName(false);
+      setIsModalOpen(false);
+    }, 1000);
   };
 
   return (

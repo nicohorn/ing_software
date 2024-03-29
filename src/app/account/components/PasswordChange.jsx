@@ -1,23 +1,59 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Notification } from "@/app/components/Notification";
 
 export const PasswordChange = ({ user }) => {
+  // State to manage the accordion open/closed state
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+  // State to track if the new password and repeated new password match
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+  // State to track the loading state during password update
   const [loadingPassword, setLoadingPassword] = useState(false);
-  const oldPasswordRef = useRef(null);
-  const newPasswordRef = useRef(null);
-  const repeatedNewPasswordRef = useRef(null);
+  // State to store input errors
+  const [inputErrors, setInputErrors] = useState({});
+  // State variables to store input values
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [repeatedNewPassword, setRepeatedNewPassword] = useState("");
 
+  // Function to validate input
+  const validateInput = (value) => {
+    return value.trim().length >= 4;
+  };
+
+  // Function to handle password update
   const handlePasswordUpdate = async (e) => {
     e.preventDefault();
-    const oldPassword = oldPasswordRef.current?.value;
-    const newPassword = newPasswordRef.current?.value;
-    const repeatedNewPassword = repeatedNewPasswordRef.current?.value;
 
+    // Initialize errors object
+    const errors = {};
+    // Validate old password input
+    if (!validateInput(oldPassword)) {
+      errors.oldPassword = "Current password must be at least 4 characters";
+    }
+    // Validate new password input
+    if (!validateInput(newPassword)) {
+      errors.newPassword = "New password must be at least 4 characters";
+    }
+    // Validate repeated new password input
+    if (!validateInput(repeatedNewPassword)) {
+      errors.repeatedNewPassword =
+        "Repeated password must be at least 4 characters";
+    }
+
+    // If there are errors, update the inputErrors state and return
+    if (Object.keys(errors).length > 0) {
+      setInputErrors(errors);
+      return;
+    }
+
+    // Set loading state to true
     setLoadingPassword(true);
+    // Clear input errors
+    setInputErrors({});
 
+    // Check if new password and repeated new password match
     if (newPassword === repeatedNewPassword) {
+      // Send API request to update password
       const res = await fetch("/api/user/update_password", {
         method: "PATCH",
         mode: "cors",
@@ -28,8 +64,8 @@ export const PasswordChange = ({ user }) => {
         }),
       });
       console.log(res);
-
       if (res.status === 200) {
+        // If password update is successful, show a success notification
         setLoadingPassword(false);
         new Notification().renderNotification({
           type: "success",
@@ -38,6 +74,7 @@ export const PasswordChange = ({ user }) => {
           seconds: 5,
         });
       } else {
+        // If password update fails, show an error notification
         setLoadingPassword(false);
         new Notification().renderNotification({
           type: "error",
@@ -47,8 +84,10 @@ export const PasswordChange = ({ user }) => {
         });
       }
     } else {
+      // If new password and repeated new password don't match, set passwordsMatch to false
       setLoadingPassword(false);
       setPasswordsMatch(false);
+      // Reset passwordsMatch to true after 8 seconds
       setTimeout(() => {
         setPasswordsMatch(true);
       }, 8000);
@@ -72,23 +111,47 @@ export const PasswordChange = ({ user }) => {
                 className="flex flex-col gap-4 pb-3"
               >
                 <input
-                  ref={oldPasswordRef}
-                  className="border-gray-300 border rounded-md px-3 py-2 text-sm"
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
+                  className={`border-gray-300 border rounded-md px-3 py-2 text-sm ${
+                    inputErrors.oldPassword ? "border-red-500" : ""
+                  }`}
                   type="password"
                   placeholder="Current password"
                 />
+                {inputErrors.oldPassword && (
+                  <p className="text-red-500 text-sm">
+                    {inputErrors.oldPassword}
+                  </p>
+                )}
                 <input
-                  ref={newPasswordRef}
-                  className="border-gray-300 border rounded-md px-3 py-2 text-sm"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className={`border-gray-300 border rounded-md px-3 py-2 text-sm ${
+                    inputErrors.newPassword ? "border-red-500" : ""
+                  }`}
                   type="password"
                   placeholder="New password"
                 />
+                {inputErrors.newPassword && (
+                  <p className="text-red-500 text-sm">
+                    {inputErrors.newPassword}
+                  </p>
+                )}
                 <input
-                  ref={repeatedNewPasswordRef}
-                  className="border-gray-300 border rounded-md px-3 py-2 text-sm"
+                  value={repeatedNewPassword}
+                  onChange={(e) => setRepeatedNewPassword(e.target.value)}
+                  className={`border-gray-300 border rounded-md px-3 py-2 text-sm ${
+                    inputErrors.repeatedNewPassword ? "border-red-500" : ""
+                  }`}
                   type="password"
                   placeholder="Repeat new password"
                 />
+                {inputErrors.repeatedNewPassword && (
+                  <p className="text-red-500 text-sm">
+                    {inputErrors.repeatedNewPassword}
+                  </p>
+                )}
                 {!passwordsMatch && (
                   <p className="animate-pulse">
                     Passwords don&apos;t match, try again
@@ -99,7 +162,7 @@ export const PasswordChange = ({ user }) => {
                   type="submit"
                 >
                   {loadingPassword ? (
-                    <div className="w-4 h-4 border-2 border-black  rounded-full animate-spin"></div>
+                    <div className="w-4 h-4 border-2 border-black rounded-full animate-spin"></div>
                   ) : (
                     "Save changes"
                   )}

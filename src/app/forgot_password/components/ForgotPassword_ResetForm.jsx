@@ -1,16 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import { Notification } from "@/app/components/Notification";
+import { useRouter } from "next/navigation";
 
-export default function ForgotPasswordResetForm({
-  email,
-  currentTimestamp,
-  tokenExpirationTime,
-  tokenFromUser,
-}) {
+export default function ForgotPasswordResetForm({ email, tokenFromUser }) {
   // State variable to store the email input value
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
+
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,8 +29,13 @@ export default function ForgotPasswordResetForm({
         type: "success",
         title: "Password updated",
         description: "Your password was successfully updated.",
-        seconds: 10,
+        seconds: 3,
       });
+
+      //Redirect to login after 3 seconds of successfully changing the password.
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
     } else {
       new Notification().renderNotification({
         type: "error",
