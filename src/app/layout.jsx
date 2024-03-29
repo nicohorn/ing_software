@@ -39,7 +39,7 @@ export default async function RootLayout({ children }) {
       <body
         className={
           raleway.className +
-          " bg-gradient-to-b from-background  to-background/70 text-white px-10 min-h-screen mt-[80px] p-10"
+          " bg-gradient-to-b from-background  to-background/70 text-white min-h-screen pt-[120px]"
         }
       >
         <Navbar session={session} links={links} />
