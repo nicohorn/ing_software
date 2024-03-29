@@ -17,8 +17,10 @@ export default function SelectComponent({ options, placeholder, data }) {
             }),
           });
 
+          const result = await res.json();
+
           // Check if the response status is not 500 (indicating a successful update)
-          if (res.status === 200) {
+          if (result.status === 200) {
             // Render a success notification using the Notification component
             new Notification().renderNotification({
               title: "Updated user role",

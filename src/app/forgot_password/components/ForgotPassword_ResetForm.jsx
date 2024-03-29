@@ -22,9 +22,9 @@ export default function ForgotPasswordResetForm({ email, tokenFromUser }) {
       body: JSON.stringify({ email, newPassword, tokenFromUser }),
     });
 
-    console.log(res);
+    const result = await res.json();
 
-    if (res.status !== 500) {
+    if (result.status === 200) {
       new Notification().renderNotification({
         type: "success",
         title: "Password updated",

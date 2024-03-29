@@ -36,7 +36,9 @@ export default function SignUpForm() {
       body: JSON.stringify({ email, code: verificationCode }),
     });
 
-    if (res.status === 200) {
+    const result = await res.json();
+
+    if (result.status === 200) {
       setIsVerified(true);
       new Notification().renderNotification({
         type: "success",
@@ -97,7 +99,9 @@ export default function SignUpForm() {
       body: JSON.stringify({ email: email, code: randomCode }),
     });
 
-    if (res.status === 200) {
+    const result = await res.json();
+
+    if (result.status === 200) {
       setShowVerification(true);
     } else {
       new Notification().renderNotification({
@@ -115,7 +119,8 @@ export default function SignUpForm() {
     if (isVerified) {
       const res = await createNewUser({ email, password });
 
-      if (res.status === 200) {
+      const result = await res.json();
+      if (result.status === 200) {
         new Notification().renderNotification({
           type: "success",
           title: "Verified email",

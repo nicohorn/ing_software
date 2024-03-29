@@ -66,8 +66,10 @@ export const NameEdit = ({ user }) => {
       }),
     });
 
+    const result = await res.json();
+
     // Check if the response is successful
-    if (res.status === 200) {
+    if (result.status === 200) {
       // Show a success notification
       new Notification().renderNotification({
         type: "success",
