@@ -11,7 +11,9 @@ export async function PATCH(req) {
     const user = await findUserByEmail(data.email);
     const passwordCheck = await verifyHashBcrypt(oldPassword, user.password)
 
+
     if (!passwordCheck) {
+        console.log(passwordCheck)
         return NextResponse.json({ status: 500, message: "Passwords don't match" })
     }
 
@@ -21,11 +23,11 @@ export async function PATCH(req) {
     // Call mongoose function to update the user's password 
     const updatedUser = await updateUserPassword(data.email, hashedPassword)
 
+    console.log(updateUser)
     if (!updatedUser) {
         return NextResponse.json({ status: 500, message: "Error updating user password" })
+    } else {
+        return NextResponse.json({ status: 200, updatedUser: updatedUser })
     }
 
-
-
-    return NextResponse.json({ status: 200, updatedUser: updatedUser })
 }

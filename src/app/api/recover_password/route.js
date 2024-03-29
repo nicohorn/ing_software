@@ -1,6 +1,6 @@
 // Import required functions and modules
 import { findTokenByEmail, updateUserPassword } from "@/index";
-import { createHashBcrypt, verifyHashBcrypt } from "@/utils/hash";
+import { createHashBcrypt } from "@/utils/hash";
 import { NextResponse } from "next/server";
 
 export async function PATCH(req) {

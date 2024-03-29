@@ -63,7 +63,9 @@ export const PasswordChange = ({ user }) => {
           email: user.email,
         }),
       });
-      if (res.status === 200) {
+      const result = await res.json();
+      if (result.status == 200) {
+        console.log(result);
         // If password update is successful, show a success notification
         setLoadingPassword(false);
         new Notification().renderNotification({
