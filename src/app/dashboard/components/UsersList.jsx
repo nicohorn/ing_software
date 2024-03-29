@@ -4,7 +4,7 @@ import UserRow from "./UserRow";
 
 export default function UsersList({ users }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 mx-20">
       <h1 className="font-bold text-3xl">Users</h1>
       <div className="p-3 rounded-lg flex justify-between">
         <p className="font-bold w-[25%]">Email</p>

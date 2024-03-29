@@ -24,10 +24,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    // The emailVerified property is recommended by Next-Auth.js
-    emailVerified: {
-        type: Date,
-    },
     // The image property is recommended by Next-Auth.js
     image: {
         type: String,

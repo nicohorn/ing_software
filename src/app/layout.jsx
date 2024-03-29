@@ -15,22 +15,6 @@ export const metadata = {
   description: "Made with Next.js 14 and NextAuth v4",
 };
 
-//Define the links separately. This way it's easier to add or remove links. Also, it's useful if we want to add more functionality or data to each link.
-const links = [
-  { title: "About", url: "/about", access: "public" },
-  { title: "Dashboard", url: "/dashboard", access: "admin" },
-  {
-    title: (
-      <div className="flex gap-2">
-        Log in <IconLogin />
-      </div>
-    ),
-    url: "/login",
-    //This would be an special access since we don't want this link to show up when we're already logged in.
-    access: "login",
-  },
-];
-
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
   return (
@@ -39,10 +23,10 @@ export default async function RootLayout({ children }) {
       <body
         className={
           raleway.className +
-          " bg-gradient-to-b from-background  to-background/70 text-white min-h-screen pt-[120px]"
+          " bg-background text-white min-h-screen pt-[120px]"
         }
       >
-        <Navbar session={session} links={links} />
+        <Navbar session={session} />
         {children}
         {/* The notification component will target this div to render the notifications */}
         <div id="notifications_container" className="relative" />
