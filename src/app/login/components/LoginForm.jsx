@@ -96,7 +96,7 @@ export default function LoginForm() {
               <p className="text-gray-400 text-sm">{passwordError}</p>
             )}
             {/* Link to password recovery page */}
-            <Link href="/signup" className="text-xs ml-1 text-white">
+            <Link href="/forgot_password" className="text-xs ml-1 text-white">
               Forgot password? Click here.
             </Link>
 
