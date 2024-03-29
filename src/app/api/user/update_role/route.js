@@ -1,8 +1,7 @@
 import { updateUserRole } from "@/index";
-import { IUser } from "@/models/User";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function PATCH(req: NextRequest) {
+export async function PATCH(req) {
 
 
     const data = await req.json(); // Parse the request body as JSON

@@ -9,20 +9,9 @@ const anton = Anton({
   weight: ["400"],
   subsets: ["latin-ext"],
 });
-export default function Navbar({
-  links,
-  session,
-}: {
-  links: {
-    //Some links can have icons, that's why the title can be a string or a ReactNode.
-    title: string | React.ReactNode;
-    url: string;
-    access: string;
-  }[];
-  session: any;
-}) {
+export default function Navbar({ links, session }) {
   //Dictionary for access control.
-  const accessDictionary: { [key: string]: string[] } = {
+  const accessDictionary = {
     admin: ["public", "admin"],
     user: ["public"],
   };

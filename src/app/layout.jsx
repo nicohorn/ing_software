@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
@@ -11,7 +10,7 @@ const raleway = Raleway({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Wekthor",
   description: "Made with Next.js 14 and NextAuth v4",
 };
@@ -32,11 +31,7 @@ const links = [
   },
 ];
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
   return (
     <html lang="en">

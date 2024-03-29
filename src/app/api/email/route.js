@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { createVerificationCode } from "@/index";
 
 //For the mailing part, follow this tutorial: https://www.freecodecamp.org/news/use-nodemailer-to-send-emails-from-your-node-js-server/
@@ -16,7 +16,7 @@ let transporter = nodemailer.createTransport({
     refreshToken: process.env.OAUTH_REFRESH_TOKEN, // Your OAuth2 refresh token
   },
 });
-export async function POST(req: NextRequest) {
+export async function POST(req) {
 
   const data = await req.json(); // Parse the request body as JSON
   const emailTo = data.email; // Extract the email address from the request body

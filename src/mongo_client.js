@@ -10,7 +10,7 @@ const uri = process.env.MONGODB_URI
 const options = {}
 
 let client
-let clientPromise: Promise<MongoClient>
+let clientPromise;
 
 
 // In production mode, it's best to not use a global variable.

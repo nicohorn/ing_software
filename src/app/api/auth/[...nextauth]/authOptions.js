@@ -1,15 +1,12 @@
-import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import { Adapter } from "next-auth/adapters";
 import clientPromise from "@/mongo_client";
 import User from "@/models/User";
 import dbConnect from "@/mongoose";
-import { CustomUserType } from "@/types/next-auth";
 import { verifyHashScrypt } from "@/utils/hash";
 
-export const authOptions: NextAuthOptions = {
-  adapter: MongoDBAdapter(clientPromise) as Adapter,
+export const authOptions = {
+  adapter: MongoDBAdapter(clientPromise),
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
@@ -37,7 +34,7 @@ export const authOptions: NextAuthOptions = {
           }
 
           const passwordCheck = await verifyHashScrypt(
-            credentials?.password!,
+            credentials?.password,
             user.password
           );
 
@@ -70,7 +67,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      const decodedUser = token.user as CustomUserType;
+      const decodedUser = token.user;
 
       // Update the session.user object with the relevant properties
       session.user = {

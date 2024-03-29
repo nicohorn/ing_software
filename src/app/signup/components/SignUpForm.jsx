@@ -9,13 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 
-async function createNewUser({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) {
+async function createNewUser({ email, password }) {
   const res = await fetch("/api/user", {
     method: "POST",
     mode: "cors",
@@ -26,9 +20,9 @@ async function createNewUser({
 }
 
 export default function SignUpForm() {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const password2Ref = useRef<HTMLInputElement>(null);
+  const emailRef = useRef < HTMLInputElement > null;
+  const passwordRef = useRef < HTMLInputElement > null;
+  const password2Ref = useRef < HTMLInputElement > null;
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const router = useRouter();
   return (
@@ -52,8 +46,8 @@ export default function SignUpForm() {
                 return;
               } else {
                 const newUser = await createNewUser({
-                  email: email!,
-                  password: password!,
+                  email: email,
+                  password: password,
                 });
                 //The flow here is the following: if the passwords match, the account will be created. The same credentials used for the account creation will be used to automatically log in. This is a nice UX experience. Any further action needed by the user (email confirmation, completing the user profile, etc) should be done afterwards, this way, it's easier to retain users into your app. Of course, we'll need to add an script or something that checks if an account is not verified for more than X days and automatically delete it.
                 if (newUser) {

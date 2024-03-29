@@ -6,5 +6,5 @@ import UsersList from "./components/UsersList";
 export default async function Page() {
   const users = await getAllUsers();
   console.log(users);
-  return <UsersList users={users!} />;
+  return <UsersList users={users} />;
 }

@@ -30,8 +30,8 @@ export const input_styles = {
 };
 
 export default function LoginForm() {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const [invalidCredentials, setInvalidCredentials] = useState(false);
 
   const router = useRouter();

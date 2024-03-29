@@ -3,7 +3,6 @@
 "use client";
 import { Notification } from "@/app/components/Notification";
 import { input_styles } from "@/app/login/components/LoginForm";
-import { IUser } from "@/models/User";
 import {
   Accordion,
   AccordionItem,
@@ -28,7 +27,7 @@ import React, { useRef, useState } from "react";
 //DISCLAIMER. This is a huge component, I could break it up in smaller components for easier readability, but sincer I wanted to deliver the project to you as soon as possible, I left it like this.
 
 /**This function is responsible for verifying the user's email address */
-async function verifyEmail({ email, code }: { email: string; code: string }) {
+async function verifyEmail({ email, code }) {
   // Make a PATCH request to the /api/user/verify_email API endpoint
   const res = await fetch("/api/user/verify_email", {
     method: "PATCH",
@@ -39,15 +38,7 @@ async function verifyEmail({ email, code }: { email: string; code: string }) {
 }
 
 /**This function is responsible for updating the user's name */
-async function updateName({
-  name,
-  lastname,
-  email,
-}: {
-  name: string;
-  lastname: string;
-  email: string;
-}) {
+async function updateName({ name, lastname, email }) {
   // Make a PATCH request to the /api/user/update_name API endpoint
   const res = await fetch("/api/user/update_name", {
     method: "PATCH",
@@ -58,15 +49,7 @@ async function updateName({
   return await res.json();
 }
 /**This function is responsible for updating the user's password */
-async function updatePassword({
-  newPassword,
-  oldPassword,
-  email,
-}: {
-  newPassword: string;
-  oldPassword: string;
-  email: string;
-}) {
+async function updatePassword({ newPassword, oldPassword, email }) {
   // Make a PATCH request to the /api/user/update_name API endpoint
   const res = await fetch("/api/user/update_password", {
     method: "PATCH",
@@ -77,19 +60,19 @@ async function updatePassword({
   return await res.json();
 }
 
-export const UserDetails = ({ user }: { user: IUser }) => {
+export const UserDetails = ({ user }) => {
   const router = useRouter();
 
   //Next Auth hook to get the session (client side);
   const { data: session } = useSession();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const nameRef = useRef<HTMLInputElement>(null);
-  const lastNameRef = useRef<HTMLInputElement>(null);
-  const verifcationCodeRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef();
+  const lastNameRef = useRef();
+  const verifcationCodeRef = useRef();
 
-  const oldPasswordRef = useRef<HTMLInputElement>(null);
-  const newPasswordRef = useRef<HTMLInputElement>(null);
-  const repeatedNewPasswordRef = useRef<HTMLInputElement>(null);
+  const oldPasswordRef = useRef();
+  const newPasswordRef = useRef();
+  const repeatedNewPasswordRef = useRef();
 
   const [passwordsMatch, setPasswordsMatch] = useState(true);
 
@@ -172,7 +155,7 @@ export const UserDetails = ({ user }: { user: IUser }) => {
                     // Call the verifyEmail function with the user's email from the session and the provided code
                     const res = await verifyEmail({
                       email: session.user.email, // Use the email from the current session
-                      code: code!, // Pass the code value
+                      code: code, // Pass the code value
                     });
 
                     if (res.status === 200) {
@@ -234,8 +217,8 @@ export const UserDetails = ({ user }: { user: IUser }) => {
                   if (newPassword === repeatedNewPassword) {
                     // If they match, call the updatePassword function with the relevant data
                     const res = await updatePassword({
-                      oldPassword: oldPassword!,
-                      newPassword: newPassword!,
+                      oldPassword: oldPassword,
+                      newPassword: newPassword,
                       email: user.email,
                     });
                     console.log(res);
@@ -339,8 +322,8 @@ export const UserDetails = ({ user }: { user: IUser }) => {
                   className="flex flex-col gap-5"
                   onSubmit={async (e) => {
                     e.preventDefault();
-                    const name = nameRef.current?.value!; // Get the value of the name input field
-                    const lastname = lastNameRef.current?.value!; // Get the value of the lastname input field
+                    const name = nameRef.current?.value; // Get the value of the name input field
+                    const lastname = lastNameRef.current?.value; // Get the value of the lastname input field
 
                     //Validate that the name and lastname inputs are not empty
                     if (name.length > 1 && lastname.length > 1) {
@@ -424,11 +407,9 @@ export const UserDetails = ({ user }: { user: IUser }) => {
   );
 };
 
-export default function UserDetailsComponent({ user }: { user: IUser }) {
+export default function UserDetailsComponent({ user }) {
   //Since the above component makes use of the session, it must be wrapped into a SessionProvider component
   return (
-    <SessionProvider>
-      <UserDetails user={user} />
-    </SessionProvider>
+    <SessionProvider>{user && <UserDetails user={user} />}</SessionProvider>
   );
 }

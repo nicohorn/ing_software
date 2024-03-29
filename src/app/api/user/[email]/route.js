@@ -1,8 +1,8 @@
 import { findUserByEmail } from "@/index";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request) {
-    const { searchParams } = new URL(request.url);
+export async function GET(req) {
+    const { searchParams } = new URL(req.url);
     const email = searchParams.get('email');
 
     // Check if the 'email' parameter is present

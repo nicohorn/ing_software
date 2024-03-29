@@ -3,15 +3,7 @@ import React from "react";
 import { Select, SelectItem } from "@nextui-org/react";
 import { Notification } from "@/app/components/Notification";
 
-export default function SelectComponent({
-  options,
-  placeholder,
-  data,
-}: {
-  options: { label: string; value: string }[];
-  placeholder: string;
-  data: any;
-}) {
+export default function SelectComponent({ options, placeholder, data }) {
   return (
     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
       <Select

@@ -9,17 +9,17 @@ async function dbConnect() {
     }
 
     // Create Connection
-    let dbConnection: Promise<Mongoose>;
-    const options: ConnectOptions = {};
+    let dbConnection;
+    const options = {};
 
     if (process.env.NODE_ENV === "development") {
         // In development mode, use a global variable so that the value
         // is preserved across module reloads caused by HMR (Hot Module Replacement).
-        if (!(global as any)._mongooseConnect) {
-            (global as any)._mongooseConnect = mongoose.connect(uri, options);
+        if (!(global)._mongooseConnect) {
+            (global)._mongooseConnect = mongoose.connect(uri, options);
         }
 
-        dbConnection = (global as any)._mongooseConnect;
+        dbConnection = (global)._mongooseConnect;
     } else {
         // In production mode, it's best to not use a global variable.
         dbConnection = mongoose.connect(uri, options);

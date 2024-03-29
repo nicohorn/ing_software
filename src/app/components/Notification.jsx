@@ -4,13 +4,6 @@ import { animate, motion } from "framer-motion";
 import { IconBug, IconCheck, IconInfoCircle } from "@tabler/icons-react";
 import { createRoot } from "react-dom/client";
 
-type NotificationType = {
-  type: "success" | "info" | "error";
-  title?: string;
-  description?: string;
-  seconds: number;
-};
-
 const styles = {
   success: {
     style: "py-1 px-2 bg-success mb-3",
@@ -27,10 +20,8 @@ const styles = {
 };
 
 export class Notification {
-  renderNotification(props: NotificationType) {
-    const root = createRoot(
-      document.getElementById("notifications_container")!
-    );
+  renderNotification(props) {
+    const root = createRoot(document.getElementById("notifications_container"));
 
     if (document.getElementById("notification")) return;
 
@@ -41,12 +32,7 @@ export class Notification {
   }
 }
 
-function NotificationComponent({
-  type,
-  title,
-  description,
-  seconds,
-}: NotificationType) {
+function NotificationComponent({ type, title, description, seconds }) {
   useEffect(() => {
     let timer = setTimeout(() => {
       animate("#notification", { opacity: 0, x: 200 });
