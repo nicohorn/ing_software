@@ -30,9 +30,29 @@ export default function SignUpForm() {
 
   // Function to handle email verification
   const handleVerification = async () => {
-    // ...
-  };
+    const res = await fetch("/api/user/verify_email", {
+      method: "PATCH",
+      mode: "cors",
+      body: JSON.stringify({ email, code: verificationCode }),
+    });
 
+    if (res.status === 200) {
+      setIsVerified(true);
+      new Notification().renderNotification({
+        type: "success",
+        title: "Verified email",
+        description: "You're all set! Your email has been verified",
+        seconds: 5,
+      });
+    } else {
+      new Notification().renderNotification({
+        type: "error",
+        title: "Couldn't verify email",
+        description: "Invalid code, please try again.",
+        seconds: 5,
+      });
+    }
+  };
   // Function to handle sign up form submission
   const handleSignUp = async (e) => {
     e.preventDefault();
