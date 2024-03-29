@@ -63,7 +63,6 @@ export const PasswordChange = ({ user }) => {
           email: user.email,
         }),
       });
-      console.log(res);
       if (res.status === 200) {
         // If password update is successful, show a success notification
         setLoadingPassword(false);

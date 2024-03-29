@@ -9,5 +9,10 @@ export async function PATCH(req) {
     const updatedUser = await updateUserName({ name: data.name, lastname: data.lastname, email: data.email })
 
     // Return a JSON response with the updated user data
-    return NextResponse.json(updatedUser)
+
+    if (updateUser) { return NextResponse.json({ status: 200, data: updatedUser }) }
+    else {
+        return NextResponse.json({ status: 500, message: "Error updating name of the user" })
+    }
+
 }

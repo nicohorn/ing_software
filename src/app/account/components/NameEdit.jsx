@@ -67,7 +67,7 @@ export const NameEdit = ({ user }) => {
     });
 
     // Check if the response is successful
-    if (res) {
+    if (res.status === 200) {
       // Show a success notification
       new Notification().renderNotification({
         type: "success",

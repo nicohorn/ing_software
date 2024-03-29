@@ -71,13 +71,13 @@ export default function SignUpForm() {
 
     // Generate a random verification code
     const randomCode = (Math.random() + 1).toString(36).substring(7);
-    const verificationCode = await fetch("/api/email", {
+    const res = await fetch("/api/email", {
       method: "POST",
       mode: "cors",
       body: JSON.stringify({ email: email, code: randomCode }),
     });
 
-    if (verificationCode.ok) {
+    if (res.status === 200) {
       setShowVerification(true);
     } else {
       new Notification().renderNotification({

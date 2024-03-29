@@ -11,6 +11,10 @@ export async function POST(req) {
     email: res.email,
     password: hashedPassword,
   });
+  if (!newUser) {
+    return NextResponse.json({ status: 500, message: "Error creating user" });
+  }
+
   // Return a JSON response with the newly created user object
-  return NextResponse.json(newUser);
+  return NextResponse.json({ status: 200, data: newUser });
 }

@@ -22,7 +22,7 @@ export async function PATCH(req) {
     const updatedUser = await updateUserPassword(data.email, hashedPassword)
 
     if (!updatedUser) {
-        return NextResponse.json({ status: 501, message: "Error updating user password" })
+        return NextResponse.json({ status: 500, message: "Error updating user password" })
     }
 
 

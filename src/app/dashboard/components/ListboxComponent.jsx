@@ -18,12 +18,20 @@ export default function SelectComponent({ options, placeholder, data }) {
           });
 
           // Check if the response status is not 500 (indicating a successful update)
-          if (res.status !== 500) {
+          if (res.status === 200) {
             // Render a success notification using the Notification component
             new Notification().renderNotification({
               title: "Updated user role",
               type: "success",
               description: "The user role was successfully updated",
+              seconds: 2,
+            });
+          } else {
+            new Notification().renderNotification({
+              title: "Error updating role",
+              type: "error",
+              description:
+                "There was an error updating the user role. Try again.",
               seconds: 2,
             });
           }

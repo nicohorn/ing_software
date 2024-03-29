@@ -37,7 +37,7 @@ export async function POST(req) {
       subject: "Verify your email",
       text: `This is your verifcation code: ${code}`,
     });
-    return NextResponse.json(mail);
+    return NextResponse.json({ status: 200, data: mail });
   } else {
     // If the createVerificationCode function returns a falsy value
     // Return a JSON response with an error status and message

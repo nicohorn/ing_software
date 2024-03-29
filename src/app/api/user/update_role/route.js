@@ -13,5 +13,5 @@ export async function PATCH(req) {
     }
 
 
-    return NextResponse.json(updatedUser)
+    return NextResponse.json({ status: 200, data: updatedUser })
 }
