@@ -7,7 +7,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-/*Don't get scared about this component, it's mostly styles from the NextUI library. The key thing here is to pass a ref to the inputs and use the value of the inputs email and password to log in when the button in the form is clicked (submit button).*/
+/*This component, is mostly styles from the NextUI library. The key thing here is to pass a ref to the inputs and use the value of the inputs email and password to log in when the button in the form is clicked (submit button).*/
 
 /*Basically, as long as you have the form, the two inputs with their refs (useRef) and the submit button, you have all you need to perform the log in flow */
 

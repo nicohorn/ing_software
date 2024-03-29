@@ -66,13 +66,13 @@ export const UserDetails = ({ user }) => {
   //Next Auth hook to get the session (client side);
   const { data: session } = useSession();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const nameRef = useRef();
-  const lastNameRef = useRef();
-  const verifcationCodeRef = useRef();
+  const nameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const verifcationCodeRef = useRef(null);
 
-  const oldPasswordRef = useRef();
-  const newPasswordRef = useRef();
-  const repeatedNewPasswordRef = useRef();
+  const oldPasswordRef = useRef(null);
+  const newPasswordRef = useRef(null);
+  const repeatedNewPasswordRef = useRef(null);
 
   const [passwordsMatch, setPasswordsMatch] = useState(true);
 

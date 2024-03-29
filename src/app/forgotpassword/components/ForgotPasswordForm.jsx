@@ -7,11 +7,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 
-async function createNewUser({ email, password }) {
+async function updatePassword({ email, oldPassword, newPassword }) {
   const res = await fetch("/api/user", {
     method: "POST",
     mode: "cors",
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email, oldPassword, newPassword }),
   });
 
   return res;
@@ -19,8 +19,8 @@ async function createNewUser({ email, password }) {
 
 export default function SignUpForm() {
   const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const password2Ref = useRef(null);
+  const newPassword = useRef(null);
+  const newPasswordRepeated = useRef(null);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const router = useRouter();
   return (
@@ -72,25 +72,19 @@ export default function SignUpForm() {
             }}
             className="flex flex-col gap-3"
           >
+            =
             <Input
-              ref={emailRef}
+              ref={newPassword}
               classNames={input_styles}
-              type="text"
-              label="Email"
+              type="password"
+              label="New password"
               variant="bordered"
             ></Input>
             <Input
-              ref={passwordRef}
+              ref={newPasswordRepeated}
               classNames={input_styles}
               type="password"
-              label="Password"
-              variant="bordered"
-            ></Input>
-            <Input
-              ref={password2Ref}
-              classNames={input_styles}
-              type="password"
-              label="Repeat password"
+              label="Repeat new password"
               variant="bordered"
             ></Input>
             <Button
@@ -98,7 +92,7 @@ export default function SignUpForm() {
               type="submit"
               color="success"
             >
-              Sign up
+              Update password
             </Button>
             {!passwordsMatch && (
               <p className="animate-pulse">Passwords don't match</p>
