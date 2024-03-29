@@ -90,8 +90,35 @@ export default function SignUpForm() {
   };
 
   // Function to handle account creation after email verification
+  // Function to handle account creation after email verification
   const handleCreateAccount = async () => {
-    // ...
+    if (isVerified) {
+      const res = await createNewUser({ email, password });
+
+      if (res.status === 200) {
+        new Notification().renderNotification({
+          type: "success",
+          title: "Verified email",
+          description: "Successfully verified email",
+          seconds: 5,
+        });
+        router.push("/login");
+      } else {
+        new Notification().renderNotification({
+          type: "error",
+          title: "Error",
+          description: "Failed to create account. Please try again.",
+          seconds: 5,
+        });
+      }
+    } else {
+      new Notification().renderNotification({
+        type: "error",
+        title: "Error",
+        description: "Please verify your email before creating an account.",
+        seconds: 5,
+      });
+    }
   };
 
   return (
