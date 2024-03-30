@@ -13,7 +13,7 @@ export const NameEdit = ({ user }) => {
   const handleNameUpdate = async (e) => {
     e.preventDefault();
 
-    // Trim the name and lastname values
+    // Trim the name and lastname values (removing whitespaces from the beginning or end of the string).
     const trimmedName = name.trim();
     const trimmedLastname = lastname.trim();
 
