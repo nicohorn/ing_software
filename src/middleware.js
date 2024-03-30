@@ -5,23 +5,27 @@ export async function middleware(req) {
   const token = await getToken({ req }); // Get the token from the request
   const user = token?.user;
 
-  if (req.nextUrl.pathname.startsWith("/api")) {
+  if (req.nextUrl.pathname.includes("api")) {
     // If the request URL starts with "/api"
     if (
-      req.nextUrl.pathname === "/api/auth" ||
-      req.nextUrl.pathname === "/api/recover_password"
+      req.nextUrl.includes("auth") ||
+      req.nextUrl.includes("recover_password")
     ) {
       // If the request URL is "/api/auth" or "/api/recover_password"
       // Allow access without authentication
       return NextResponse.next();
     }
-
-    if (!token) {
-      // If there is no token (user is not authenticated)
-      // Return an unauthorized response
+    else {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-  } else {
+  }
+
+  if (!token) {
+    // If there is no token (user is not authenticated)
+    // Return an unauthorized response
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  else {
     if (!token) {
       // If there is no token (user is not authenticated)
       if (req.nextUrl.pathname.includes("account")) {
