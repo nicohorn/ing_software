@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Notification } from "@/app/components/Notification";
 
+//This component is the responsible for sending an email with the password recovery link. That link will use the ForgotPassword_RestForm component.
 export default function ForgotPasswordEmailForm() {
   // State variable to store the email input value
   const [email, setEmail] = useState("");
