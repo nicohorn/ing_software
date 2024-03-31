@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Notification } from "@/app/components/Notification";
+import { useRouter } from "next/navigation";
 
 export const NameEdit = ({ user }) => {
   // State variables
@@ -8,6 +9,8 @@ export const NameEdit = ({ user }) => {
   const [loadingName, setLoadingName] = useState(false);
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
+
+  const router = useRouter();
 
   // Handler for updating the user's name
   const handleNameUpdate = async (e) => {
@@ -89,6 +92,8 @@ export const NameEdit = ({ user }) => {
 
     // Delay for 1 second before closing the modal and resetting the loading state
     setTimeout(() => {
+      //Refresh the page to show the updated name
+      router.refresh();
       setLoadingName(false);
       setIsModalOpen(false);
     }, 1000);

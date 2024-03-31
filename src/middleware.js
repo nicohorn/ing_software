@@ -7,11 +7,22 @@ export async function middleware(req) {
   const user = token?.user
 
 
+
+  //Let api routes /recover_password and /auth be free for everyone as their needed without having a session in the app.
+  if (req.nextUrl.pathname.includes("recover_password") || req.nextUrl.pathname.includes("auth")) {
+    console.log("asdlkj")
+    return NextResponse.next();
+  }
+
   if (!token) {
     // If there is no token (user is not authenticated)
     if (req.nextUrl.pathname.includes("account")) {
       // If the request URL includes "/account". As they are not authenticated, they'll be redirected to the homepage.
       return NextResponse.redirect(process.env.NEXTAUTH_URL)
+    }
+    //Protect api routes
+    if (req.nextUrl.pathname.includes("api")) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
   } else {
     // If there is a token (user is authenticated)
@@ -19,6 +30,8 @@ export async function middleware(req) {
       // If the request URL includes "/dashboard" and the user's role is not "admin". If they're not an admin, they'll be redirected to the home page.
       return NextResponse.redirect(process.env.NEXTAUTH_URL)
     }
+
+
   }
 
 
