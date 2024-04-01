@@ -18,7 +18,7 @@ export async function middleware(req) {
     // If there is no token (user is not authenticated)
     if (req.nextUrl.pathname.includes("account")) {
       // If the request URL includes "/account". As they are not authenticated, they'll be redirected to the homepage.
-      return NextResponse.redirect(process.env.NEXTAUTH_URL)
+      return NextResponse.redirect(new URL("/", process.env.NEXTAUTH_URL))
     }
     //Protect api routes
     if (req.nextUrl.pathname.includes("api")) {
@@ -28,7 +28,7 @@ export async function middleware(req) {
     // If there is a token (user is authenticated)
     if (req.nextUrl.pathname.includes("dashboard") && user.role !== "admin") {
       // If the request URL includes "/dashboard" and the user's role is not "admin". If they're not an admin, they'll be redirected to the home page.
-      return NextResponse.redirect(process.env.NEXTAUTH_URL)
+      return NextResponse.redirect(new URL("/", process.env.NEXTAUTH_URL))
     }
 
   }

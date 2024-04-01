@@ -40,7 +40,7 @@ export async function POST(req) {
     } else {
         // If a user is found, create a token and send a link to their email.
         const token = jwt.sign({ email: user.email }, JWT_SECRET, { expiresIn: '1h' });
-        const resetLink = `${process.env.NEXTAUTH_URL || "wekthor-games-webpage.vercel.app"}/forgot_password/${token}`;
+        const resetLink = `${process.env.NEXTAUTH_URL}/forgot_password/${token}`;
 
         //Create a new token in the DB
         console.log(token)
