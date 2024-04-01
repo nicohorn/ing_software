@@ -9,8 +9,8 @@ export async function middleware(req) {
 
 
   //Let api routes /recover_password and /auth be free for everyone as their needed without having a session in the app.
-  if (req.nextUrl.pathname.includes("recover_password") || req.nextUrl.pathname.includes("auth")) {
-    console.log("asdlkj")
+  if (req.nextUrl.pathname.includes("forgot_password") || req.nextUrl.pathname.includes("auth")) {
+
     return NextResponse.next();
   }
 

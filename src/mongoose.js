@@ -1,5 +1,5 @@
 // This approach is taken from https://github.com/vercel/next.js/tree/canary/examples/with-mongodb
-import mongoose, { ConnectOptions, Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 // Check URI
 const uri = process.env.MONGODB_URI || "";
