@@ -6,9 +6,11 @@ import { NextResponse } from "next/server";
 export async function PATCH(req) {
     // Parse the request body as JSON
     const data = await req.json();
-
     // Find the password recovery token associated with the provided email
     const passwordRecoveryToken = await findTokenByEmail(data.email);
+
+
+    console.log(passwordRecoveryToken)
 
     if (passwordRecoveryToken) {
         // Check if the token provided by the user matches the stored token

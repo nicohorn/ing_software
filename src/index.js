@@ -84,7 +84,6 @@ async function updateUserRole(email, newRole) {
 async function updateUserPassword(email, newPassword) {
     try {
         await dbConnect();
-        console.log("update user password");
         // Documentation: https://masteringjs.io/tutorials/mongoose/update
         const updatedUser = await User.findOneAndUpdate(
             { email: email },
@@ -140,32 +139,36 @@ async function updateUserName({ name, lastname, email }) {
 
 
 /**
- * Creates a new password recovery token.
+ * Creates or updates a password recovery token.
  * @async
- * @param {Object} options - The options for creating the password recovery token.
+ * @param {Object} options - The options for creating or updating the password recovery token.
  * @param {string} options.passwordRecoveryToken - The password recovery token.
  * @param {string} options.email - The email associated with the password recovery token.
- * @returns {Promise<Object|null>} The newly created password recovery token or null if an error occurs.
+ * @returns {Promise<Object|null>} The created or updated password recovery token or null if an error occurs.
  */
 async function createPasswordRecoveryToken({ passwordRecoveryToken, email }) {
     try {
         // Connect to the database
         await dbConnect();
 
-        /**
-         * Create a new password recovery token.
-         * @type {Object}
-         * @property {string} token - The password recovery token.
-         * @property {string} email - The email associated with the password recovery token.
-         * @property {Date} createdAt - The timestamp when the token was created.
-         */
-        const newPasswordRecoveryToken = await PasswordRecoverToken.create({
-            token: passwordRecoveryToken,
-            email: email,
-            createdAt: new Date(),
-        });
+        // Check if a password recovery token already exists for the given email
+        const existingToken = await PasswordRecoverToken.findOne({ email });
 
-        return newPasswordRecoveryToken;
+        if (existingToken) {
+            // If a token exists, update it with the new token and timestamp
+            existingToken.token = passwordRecoveryToken;
+            existingToken.createdAt = new Date();
+            await existingToken.save();
+            return existingToken;
+        } else {
+            // If no token exists, create a new one
+            const newPasswordRecoveryToken = await PasswordRecoverToken.create({
+                token: passwordRecoveryToken,
+                email: email,
+                createdAt: new Date(),
+            });
+            return newPasswordRecoveryToken;
+        }
     } catch (e) {
         // Log any errors that occur
         console.log(e);

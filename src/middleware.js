@@ -9,7 +9,7 @@ export async function middleware(req) {
 
 
   //Let api routes that are needed without authentication be free for everyone.
-  if (req.nextUrl.pathname.includes("forgot_password") || req.nextUrl.pathname.includes("auth") || req.nextUrl.pathname.includes("email") || req.nextUrl.pathname.includes("account_verification") || req.nextUrl.pathname.includes("token_verification") || req.nextUrl.pathname.startsWith("/api/user")) {
+  if (req.nextUrl.pathname.includes("forgot_password") || req.nextUrl.pathname.includes("recover_password") || req.nextUrl.pathname.includes("auth") || req.nextUrl.pathname.includes("email") || req.nextUrl.pathname.includes("account_verification") || req.nextUrl.pathname.includes("token_verification") || req.nextUrl.pathname.startsWith("/api/user")) {
 
     return NextResponse.next();
   }
@@ -30,7 +30,6 @@ export async function middleware(req) {
       // If the request URL includes "/dashboard" and the user's role is not "admin". If they're not an admin, they'll be redirected to the home page.
       return NextResponse.redirect(process.env.NEXTAUTH_URL)
     }
-
 
   }
 

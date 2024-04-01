@@ -7,14 +7,34 @@ export default function ForgotPasswordResetForm({ email, tokenFromUser }) {
   // State variable to store the email input value
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
-
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("asdkalsjdl");
-    // Display a notification to inform the user that the password was updated
 
+    // Validate password length
+    if (newPassword.length < 3) {
+      new Notification().renderNotification({
+        type: "error",
+        title: "Invalid password",
+        description: "Password must be at least 3 characters long.",
+        seconds: 5,
+      });
+      return;
+    }
+
+    // Check if passwords match
+    if (newPassword !== newPasswordRepeat) {
+      new Notification().renderNotification({
+        type: "error",
+        title: "Password mismatch",
+        description: "Passwords do not match.",
+        seconds: 5,
+      });
+      return;
+    }
+
+    // Display a notification to inform the user that the password was updated
     // Send a POST request to the server with the email address
     const res = await fetch(`/api/recover_password`, {
       method: "PATCH",
@@ -23,7 +43,6 @@ export default function ForgotPasswordResetForm({ email, tokenFromUser }) {
     });
 
     const result = await res.json();
-
     if (result.status === 200) {
       new Notification().renderNotification({
         type: "success",
@@ -31,7 +50,6 @@ export default function ForgotPasswordResetForm({ email, tokenFromUser }) {
         description: "Your password was successfully updated.",
         seconds: 3,
       });
-
       //Redirect to login after 3 seconds of successfully changing the password.
       setTimeout(() => {
         router.push("/login");
@@ -50,13 +68,11 @@ export default function ForgotPasswordResetForm({ email, tokenFromUser }) {
     <div>
       {/* Heading */}
       <h1 className="font-bold text-2xl ml-2 mb-2">Reset password</h1>
-
       {/* Form container */}
       <div className="md:max-w-96 w-[95vw] bg-primary rounded-lg shadow-lg p-6">
         <p className="text-xs text-white mb-1">Enter a new password</p>
         <div className="text-black flex flex-col gap-4">
           {/* Form */}
-
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             {/* Email input field */}
             <input
@@ -73,7 +89,6 @@ export default function ForgotPasswordResetForm({ email, tokenFromUser }) {
               type="password"
               placeholder="Repeat new password"
             />
-
             {/* Submit button */}
             <button
               className="bg-green-500 text-white rounded-md py-2 font-semibold shadow-md"
