@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Notification } from "@/app/components/Notification";
 
@@ -19,42 +18,10 @@ export default function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const [verificationCode, setVerificationCode] = useState("");
 
   // State variables
   const [passwordsMatch, setPasswordsMatch] = useState(true);
-  const [showVerification, setShowVerification] = useState(false);
-  const [isVerified, setIsVerified] = useState(false);
 
-  const router = useRouter();
-
-  // Function to handle email verification
-  const handleVerification = async () => {
-    const res = await fetch("/api/user/verify_email", {
-      method: "PATCH",
-      mode: "cors",
-      body: JSON.stringify({ email, code: verificationCode }),
-    });
-
-    const result = await res.json();
-
-    if (result.status === 200) {
-      setIsVerified(true);
-      new Notification().renderNotification({
-        type: "success",
-        title: "Verified email",
-        description: "You're all set! Your email has been verified",
-        seconds: 5,
-      });
-    } else {
-      new Notification().renderNotification({
-        type: "error",
-        title: "Couldn't verify email",
-        description: "Invalid code, please try again.",
-        seconds: 5,
-      });
-    }
-  };
   // Function to handle sign up form submission
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -75,14 +42,14 @@ export default function SignUpForm() {
     if (password.length < 4) {
       new Notification().renderNotification({
         type: "info",
-        title: "Password too short",
+        title: "Password is too short",
         description: "Password must be at least 4 characters long.",
         seconds: 5,
       });
       return;
     }
 
-    // Check if passwords match
+    // Check if passwords don't match.
     if (password !== password2) {
       setPasswordsMatch(false);
       setTimeout(() => {
@@ -91,15 +58,15 @@ export default function SignUpForm() {
       return;
     }
 
-    // Generate a random verification code
-    const randomCode = (Math.random() + 1).toString(36).substring(7);
+    // Send the verification link to the user's email
     const res = await fetch("/api/email", {
       method: "POST",
       mode: "cors",
-      body: JSON.stringify({ email: email, code: randomCode }),
+      body: JSON.stringify({ email: email, password: password }),
     });
 
     const result = await res.json();
+
     if (result.status === 501) {
       new Notification().renderNotification({
         type: "error",
@@ -108,45 +75,18 @@ export default function SignUpForm() {
         seconds: 5,
       });
     } else if (result.status === 200) {
-      setShowVerification(true);
-    } else {
       new Notification().renderNotification({
-        type: "error",
-        title: "Error",
-        description: "Failed to send verification code. Please try again.",
+        type: "success",
+        title: "Verification link sent",
+        description:
+          "Please check your email for the verification link. You can close this page.",
         seconds: 5,
       });
-    }
-  };
-
-  // Function to handle account creation after email verification
-  // Function to handle account creation after email verification
-  const handleCreateAccount = async () => {
-    if (isVerified) {
-      const res = await createNewUser({ email, password });
-
-      const result = await res.json();
-      if (result.status === 200) {
-        new Notification().renderNotification({
-          type: "success",
-          title: "Verified email",
-          description: "Successfully verified email",
-          seconds: 5,
-        });
-        router.push("/login");
-      } else {
-        new Notification().renderNotification({
-          type: "error",
-          title: "Error",
-          description: "Failed to create account. Please try again.",
-          seconds: 5,
-        });
-      }
     } else {
       new Notification().renderNotification({
         type: "error",
         title: "Error",
-        description: "Please verify your email before creating an account.",
+        description: "Failed to send verification link. Please try again.",
         seconds: 5,
       });
     }
@@ -157,67 +97,38 @@ export default function SignUpForm() {
       <h1 className="font-bold text-2xl ml-2 mb-2">Sign up</h1>
       <div className="md:max-w-96 w-[95vw] bg-primary rounded-lg shadow-lg p-6">
         <div className="text-black flex flex-col gap-4">
-          {!showVerification ? (
-            // Sign up form
-            <form onSubmit={handleSignUp} className="flex flex-col gap-3">
-              <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="border-gray-300 border rounded-md px-3 py-2"
-                type="text"
-                placeholder="Email"
-              />
-              <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border-gray-300 border rounded-md px-3 py-2"
-                type="password"
-                placeholder="Password"
-              />
-              <input
-                value={password2}
-                onChange={(e) => setPassword2(e.target.value)}
-                className="border-gray-300 border rounded-md px-3 py-2"
-                type="password"
-                placeholder="Repeat password"
-              />
-              <button
-                className="bg-green-500 text-white rounded-md py-2 font-semibold shadow-md"
-                type="submit"
-              >
-                Sign up
-              </button>
-              {!passwordsMatch && (
-                <p className="animate-pulse">Passwords don&apos;t match</p>
-              )}
-            </form>
-          ) : (
-            // Email verification form
-            <div className="flex flex-col gap-2">
-              <p className="text-xs text-white">Verify email</p>
-              <input
-                value={verificationCode}
-                onChange={(e) => setVerificationCode(e.target.value)}
-                className="border-gray-300 border rounded-md px-3 py-2 text-sm"
-                type="text"
-                placeholder="Email code"
-              />
-              <button
-                onClick={handleVerification}
-                className="bg-gray-200 text-black px-3 py-1 rounded-md shadow-md w-full"
-              >
-                Verify
-              </button>
-              {isVerified && (
-                <button
-                  onClick={handleCreateAccount}
-                  className="bg-green-500 text-white rounded-md py-2 font-semibold shadow-md"
-                >
-                  Create Account
-                </button>
-              )}
-            </div>
-          )}
+          <form onSubmit={handleSignUp} className="flex flex-col gap-3">
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border-gray-300 border rounded-md px-3 py-2"
+              type="text"
+              placeholder="Email"
+            />
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="border-gray-300 border rounded-md px-3 py-2"
+              type="password"
+              placeholder="Password"
+            />
+            <input
+              value={password2}
+              onChange={(e) => setPassword2(e.target.value)}
+              className="border-gray-300 border rounded-md px-3 py-2"
+              type="password"
+              placeholder="Repeat password"
+            />
+            <button
+              className="bg-green-500 text-white rounded-md py-2 font-semibold shadow-md"
+              type="submit"
+            >
+              Sign up
+            </button>
+            {!passwordsMatch && (
+              <p className="animate-pulse">Passwords don&apos;t match</p>
+            )}
+          </form>
           <Link href="/login" className="text-xs ml-1 text-white">
             Already have an account? Log in here.
           </Link>

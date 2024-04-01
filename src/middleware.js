@@ -8,8 +8,8 @@ export async function middleware(req) {
 
 
 
-  //Let api routes /recover_password, /auth and /email  be free for everyone as their needed without having a session in the app.
-  if (req.nextUrl.pathname.includes("forgot_password") || req.nextUrl.pathname.includes("auth") || req.nextUrl.pathname.includes("email")) {
+  //Let api routes that are needed without authentication be free for everyone.
+  if (req.nextUrl.pathname.includes("forgot_password") || req.nextUrl.pathname.includes("auth") || req.nextUrl.pathname.includes("email") || req.nextUrl.pathname.includes("account_verification") || req.nextUrl.pathname.includes("token_verification") || req.nextUrl.pathname.startsWith("/api/user")) {
 
     return NextResponse.next();
   }

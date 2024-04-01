@@ -1,11 +1,9 @@
 import { createUser } from "@/index";
 import { createHashBcrypt } from "@/utils/hash";
 import { NextResponse } from "next/server";
-import { findUserByEmail } from "@/index"
 
 export async function POST(req) {
   const res = await req.json(); // Parse the request body as JSON
-
 
   // Hash the provided password using the createHashScrypt function
   const hashedPassword = await createHashBcrypt(res.password);
