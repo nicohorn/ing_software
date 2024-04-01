@@ -45,7 +45,7 @@ export async function POST(req) {
       to: email,
       subject: "Verify your email",
       text: `Please click the following link to verify your email: ${verificationLink}`,
-      html: `<p>Please click the following link to verify your email:</p><a href="${verificationLink}">${verificationLink}</a>`,
+      html: `<p>Please click the following link to verify your email:</p><a href="${verificationLink}"> Create account</a>`,
     });
 
     return NextResponse.json({ status: 200, data: mail });

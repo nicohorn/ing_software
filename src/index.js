@@ -1,6 +1,5 @@
 import PasswordRecoverToken from "./models/PasswordRecoverToken";
 import User from "./models/User";
-import VerificationCode from "./models/VerificationCode";
 import dbConnect from "./mongoose";
 
 // All of these functions are the ones that "talk" with the database. These functions are then consumed in the API routes.
@@ -115,67 +114,6 @@ async function findUserByEmail(email) {
     }
 }
 
-/**
- * Creates a unique verification code for the user that creates a new account.
- * @param {Object} codeData - The verification code data object.
- * @param {string} codeData.verificationCode - The verification code.
- * @param {string} codeData.email - The email associated with the verification code.
- * @returns {Promise<VerificationCode|null>} The created or updated verification code or null if an error occurs.
- */
-async function createVerificationCode({ verificationCode, email }) {
-    try {
-        await dbConnect();
-
-        // Check if a verification code already exists for the email
-        const existingCode = await VerificationCode.findOne({ email: email });
-
-        if (existingCode) {
-            // If a verification code exists, update it with the new code
-            existingCode.verificationCode = verificationCode;
-            existingCode.createdAt = new Date();
-            await existingCode.save();
-            return existingCode;
-        } else {
-            // If no verification code exists, create a new one
-            const newVerificationCode = await VerificationCode.create({
-                verificationCode: verificationCode,
-                email: email,
-                createdAt: new Date(),
-            });
-            return newVerificationCode;
-        }
-    } catch (e) {
-        console.log(e);
-        return null;
-    }
-}
-
-/**
- * Verifies an account by checking the verification code provided by the user.
- * @param {Object} verificationData - The verification data object.
- * @param {string} verificationData.email - The email of the user to verify.
- * @param {string} verificationData.codeThatTheUserHas - The verification code provided by the user.
- * @returns {Promise<User|null>} The verified user or null if verification fails or an error occurs.
- */
-async function verifyEmail({ email, codeThatTheUserHas }) {
-    try {
-        await dbConnect();
-        const findCode = await VerificationCode.findOne({ email: email });
-        if (findCode.verificationCode === codeThatTheUserHas) {
-            // Documentation: https://masteringjs.io/tutorials/mongoose/update
-            const user = await User.findOneAndUpdate(
-                { email: email },
-                { emailVerified: new Date() },
-                { new: true }
-            );
-            return user;
-        }
-        return null;
-    } catch (e) {
-        console.log(e);
-        return null;
-    }
-}
 
 /**
  * Updates the name and last name of a user.
@@ -266,8 +204,6 @@ module.exports = {
     updateUserRole,
     updateUserPassword,
     findUserByEmail,
-    createVerificationCode,
-    verifyEmail,
     updateUserName,
     createPasswordRecoveryToken,
     findTokenByEmail
