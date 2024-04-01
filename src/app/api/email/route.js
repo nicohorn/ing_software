@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 import { createVerificationCode } from "@/index";
+import { findUserByEmail } from "@/index"
 
 //For the mailing part, follow this tutorial: https://www.freecodecamp.org/news/use-nodemailer-to-send-emails-from-your-node-js-server/
 //I had to tweak a bit the auth object but it's working fine like this!
@@ -21,6 +22,14 @@ export async function POST(req) {
   const data = await req.json(); // Parse the request body as JSON
   const emailTo = data.email; // Extract the email address from the request body
   const code = data.code; // Extract the verification code from the request body
+
+
+  //Check if user already exists
+  const user = await findUserByEmail(data.email)
+  if (user) {
+    console.log("alksjdljskdjlksd")
+    return NextResponse.json({ status: 501, message: "Email already exists" });
+  }
 
   // Call the createVerificationCode function with the provided verification code and email
   const createNewCode = await createVerificationCode({

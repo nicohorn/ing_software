@@ -100,8 +100,14 @@ export default function SignUpForm() {
     });
 
     const result = await res.json();
-
-    if (result.status === 200) {
+    if (result.status === 501) {
+      new Notification().renderNotification({
+        type: "error",
+        title: "Error",
+        description: "That email is already being used.",
+        seconds: 5,
+      });
+    } else if (result.status === 200) {
       setShowVerification(true);
     } else {
       new Notification().renderNotification({
