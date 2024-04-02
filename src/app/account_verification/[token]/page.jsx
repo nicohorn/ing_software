@@ -2,6 +2,7 @@
 import React from "react";
 import { Notification } from "@/app/components/Notification";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Page({ params }) {
   const router = useRouter();
@@ -46,6 +47,13 @@ export default function Page({ params }) {
         setTimeout(() => {
           router.push("/login");
         }, 7000);
+      } else if (userCreated.status === 501) {
+        new Notification().renderNotification({
+          title: "Error creating user",
+          description: "User with that email already exists.",
+          type: "error",
+          seconds: 7,
+        });
       } else {
         // Display an error notification if there was an error creating the user
         new Notification().renderNotification({
@@ -76,17 +84,38 @@ export default function Page({ params }) {
     }
   };
 
-  return (
-    <div className="flex justify-center flex-col items-center gap-4">
-      <p className="text-xs">
-        Click on the button below to complete your registration!
-      </p>
-      <button
-        className="bg-primary rounded-lg p-2 shadow-lg"
-        onClick={handleSignUp}
-      >
-        Complete sign up
-      </button>
-    </div>
-  );
+  // Extract the expiration time from the decoded token
+  const expirationTime = result.data.exp;
+
+  // Get the current timestamp
+  const currentTimestamp = Math.floor(Date.now() / 1000);
+  if (currentTimestamp < expirationTime) {
+    return (
+      <div className="flex justify-center flex-col items-center gap-4">
+        <p className="text-xs">
+          Click on the button below to complete your registration!
+        </p>
+        <button
+          className="bg-primary rounded-lg p-2 shadow-lg"
+          onClick={handleSignUp}
+        >
+          Complete sign up
+        </button>
+      </div>
+    );
+  } else {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-between">
+        <div className="flex flex-col gap-2 items-center">
+          {/* Display a message indicating that the token has expired */}
+          <h1 className="p-2 bg-primary rounded-md shadow-md">Token expired</h1>
+
+          {/* Render a link to the forgot password page */}
+          <Link className="text-white text-xs hover:underline" href="/signup">
+            Create account
+          </Link>
+        </div>
+      </div>
+    );
+  }
 }
