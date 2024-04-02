@@ -11,7 +11,6 @@ export async function POST(req) {
     try {
 
         await dbConnect();
-
         const decoded = jwt.verify(data.token, process.env.NEXTAUTH_SECRET);
 
         return NextResponse.json({ status: 200, valid: true, data: decoded });
