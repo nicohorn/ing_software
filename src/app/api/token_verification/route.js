@@ -1,6 +1,7 @@
 // Import required functions and modules
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken"
+import dbConnect from "@/mongoose";
 
 
 
@@ -8,6 +9,9 @@ import jwt from "jsonwebtoken"
 export async function POST(req) {
     const data = await req.json();
     try {
+
+        await dbConnect();
+
         const decoded = jwt.verify(data.token, process.env.NEXTAUTH_SECRET);
 
         return NextResponse.json({ status: 200, valid: true, data: decoded });
