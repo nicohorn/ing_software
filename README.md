@@ -1,6 +1,17 @@
-## Getting Started
+## Ejemplos para las cátedras de ingeniería de software I y II
 
-First, run the development server:
+Antes que nada, tenés que tener instalado git y node en tu computadora:
+https://git-scm.com/
+https://nodejs.org/
+
+Cloná este repositorio en tu máquina usando el siguiente comando:
+
+```git clone https://github.com/nicohorn/ing_software```
+
+Luego, instalá las dependencias del proyecto con el siguiente comando
+
+```npm install```
+
 
 ```bash
 npm run dev
