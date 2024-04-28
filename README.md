@@ -8,11 +8,15 @@ https://nodejs.org/
 
 Cloná este repositorio en tu máquina usando el siguiente comando:
 
-```git clone https://github.com/nicohorn/ing_software```
+```bash 
+git clone https://github.com/nicohorn/ing_software
+```
 
 Luego, instalá las dependencias del proyecto con el siguiente comando
 
-```npm install```
+```bash
+npm install
+```
 
 
 ```bash
