@@ -1,7 +1,9 @@
 ## Ejemplos para las cátedras de ingeniería de software I y II
 
 Antes que nada, tenés que tener instalado git y node en tu computadora:
+
 https://git-scm.com/
+
 https://nodejs.org/
 
 Cloná este repositorio en tu máquina usando el siguiente comando:
