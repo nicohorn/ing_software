@@ -18,7 +18,7 @@ Luego, instalá las dependencias del proyecto con el siguiente comando
 npm install
 ```
 
-
+Para correr el servidor local, podés usar cualquiera de los comandos de abajo
 ```bash
 npm run dev
 # or
@@ -29,4 +29,4 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrí [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
