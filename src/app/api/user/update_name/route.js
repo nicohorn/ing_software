@@ -1,4 +1,4 @@
-import { updateUserName } from "@/index";
+import { updateUserName } from from "@/controllers/index";
 import { NextResponse } from "next/server";
 
 export async function PATCH(req) {

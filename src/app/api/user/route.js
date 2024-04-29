@@ -1,7 +1,7 @@
-import { createUser } from "@/index";
+import { createUser } from "@/controllers/index";
 import { createHashBcrypt } from "@/utils/hash";
 import { NextResponse } from "next/server";
-import { findUserByEmail } from "@/index"
+import { findUserByEmail } from "@/controllers/index";
 
 export async function POST(req) {
   const data = await req.json(); // Parse the request body as JSON

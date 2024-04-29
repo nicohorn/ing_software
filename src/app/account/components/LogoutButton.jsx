@@ -10,7 +10,7 @@ export const LogoutButton = () => {
         signOut({ callbackUrl: "/" });
       }}
     >
-      Log out <IconLogout className="stroke-1 " />
+      Cerrar sesión <IconLogout className="stroke-1 " />
     </button>
   );
 };

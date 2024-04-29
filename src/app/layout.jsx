@@ -10,7 +10,7 @@ const raleway = Raleway({
 });
 
 export const metadata = {
-  title: "Wekthor",
+  title: "Ingeniería de software",
   description: "Made with Next.js 14 and NextAuth v4",
 };
 

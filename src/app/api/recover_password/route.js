@@ -1,5 +1,5 @@
 // Import required functions and modules
-import { findTokenByEmail, updateUserPassword } from "@/index";
+import { findTokenByEmail, updateUserPassword } from "@/controllers/index";
 import { createHashBcrypt } from "@/utils/hash";
 import { NextResponse } from "next/server";
 

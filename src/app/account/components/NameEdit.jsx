@@ -101,7 +101,7 @@ export const NameEdit = ({ user }) => {
 
   return (
     <div>
-      <p className="text-xs">Name</p>
+      <p className="text-xs">Nombre</p>
       <div>
         {/* Check if the user has a name */}
         {user?.name ? (
@@ -114,7 +114,7 @@ export const NameEdit = ({ user }) => {
               className="bg-gray-200 text-black px-3 py-1 font-normal rounded-md shadow-md"
               onClick={() => setIsModalOpen(true)}
             >
-              Edit name
+              Editar nombre
             </button>
           </div>
         ) : (
@@ -123,7 +123,7 @@ export const NameEdit = ({ user }) => {
             className="bg-gray-200 text-black px-3 py-1 rounded-md shadow-md w-full"
             onClick={() => setIsModalOpen(true)}
           >
-            Add your name
+            Agregá tu nombre
           </button>
         )}
       </div>
@@ -131,7 +131,7 @@ export const NameEdit = ({ user }) => {
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <div className="flex flex-col gap-1 text-black mb-4">Your name</div>
+            <div className="flex flex-col gap-1 text-black mb-4">Tu nombre</div>
             {/* Form for updating the name */}
             <form
               id="name_edit_form"
@@ -144,7 +144,7 @@ export const NameEdit = ({ user }) => {
                 onChange={(e) => setName(e.target.value)}
                 className="border-gray-300 border rounded-md px-3 py-2"
                 type="text"
-                placeholder="Name"
+                placeholder="Nombre"
               />
               {/* Input field for lastname */}
               <input
@@ -152,7 +152,7 @@ export const NameEdit = ({ user }) => {
                 onChange={(e) => setLastname(e.target.value)}
                 className="border-gray-300 border rounded-md px-3 py-2"
                 type="text"
-                placeholder="Last name"
+                placeholder="Apellido"
               />
             </form>
             <div className="flex justify-end gap-2 mt-4">
@@ -161,7 +161,7 @@ export const NameEdit = ({ user }) => {
                 className="bg-red-400 text-white px-3 py-1 rounded-md"
                 onClick={() => setIsModalOpen(false)}
               >
-                Close
+                Cerrar
               </button>
               {/* Button to submit the form */}
               <button
@@ -176,7 +176,7 @@ export const NameEdit = ({ user }) => {
                 {loadingName ? (
                   <div className="w-4 h-4 border-2 border-white rounded-full animate-spin"></div>
                 ) : (
-                  "Save"
+                  "Guardar"
                 )}
               </button>
             </div>

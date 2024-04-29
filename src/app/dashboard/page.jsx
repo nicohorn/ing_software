@@ -1,4 +1,4 @@
-import { getAllUsers } from "@/index";
+import { getAllUsers } from "@/controllers/index";
 import React from "react";
 import UsersList from "./components/UsersList";
 

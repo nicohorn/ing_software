@@ -20,7 +20,7 @@ const UserDetails = ({ user }) => {
 
   return (
     <div className="flex justify-center items-center flex-col gap-2 w-fit mx-auto">
-      <h1 className="font-bold text-2xl self-start ml-2">Account details</h1>
+      <h1 className="font-bold text-2xl self-start ml-2">Detalles de tu cuenta</h1>
       <div className="md:max-w-96 w-[95vw] bg-primary rounded-lg shadow-lg p-6">
         <div className="text-white flex flex-col gap-4">
           {/* User email */}
@@ -35,7 +35,7 @@ const UserDetails = ({ user }) => {
           <hr />
           {/* User role */}
           <div>
-            <p className="text-xs">Role</p>
+            <p className="text-xs">Rol</p>
             <div className="font-bold">{user?.role}</div>
           </div>
         </div>

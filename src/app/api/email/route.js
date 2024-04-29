@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
-import { findUserByEmail } from "@/index";
+import { findUserByEmail } from "@/controllers/index";
 import jwt from "jsonwebtoken";
 
 let transporter = nodemailer.createTransport({

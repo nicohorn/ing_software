@@ -1,7 +1,7 @@
-import { findUserByEmail } from "@/index";
+import { findUserByEmail } from "@/controllers/index";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
-import { createPasswordRecoveryToken } from "@/index"
+import { createPasswordRecoveryToken } from "@/controllers/index";
 import nodemailer from 'nodemailer';
 
 const JWT_SECRET = process.env.NEXTAUTH_SECRET; // I'm using the same secret as the one I'm using in Next Auth

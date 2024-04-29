@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { IconMenu, IconUser, IconLogin } from "@tabler/icons-react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar({ session }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,17 +18,20 @@ export default function Navbar({ session }) {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const path = usePathname();
+
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="w-screen fixed top-0 h-20 md:flex hidden items-center justify-center gap-10 bg-background left-0 z-30 shadow-lg">
+      <nav className="w-screen fixed top-0 h-20 md:flex hidden gap-10 bg-background left-0 z-30 shadow-lg">
+        <div className="flex items-center w-full mx-20 justify-between">
         {/* Logo */}
         <div className="font-extrabold text-4xl active:scale-95">
           <Link
-            className="transition duration-75 hover:text-black font-semibold p-2 rounded-xl hover:bg-success hover:shadow-lg"
+            className="transition duration-75 hover:text-black font-semibold px-2 py-1 rounded-xl hover:bg-success hover:shadow-lg"
             href="/"
           >
-            Wekthor
+            Ingeniería de software
           </Link>
         </div>
         {/* Navigation Links */}
@@ -37,7 +41,7 @@ export default function Navbar({ session }) {
             className="active:scale-95 transition duration-75 hover:text-black font-semibold px-2 py-1 rounded-xl hover:bg-success hover:shadow-lg"
             href="/about"
           >
-            About
+            Más información
           </Link>
           {/* Dashboard Link - Only visible to admin users */}
           {session && accessDictionary[session.user.role].includes("admin") && (
@@ -49,12 +53,12 @@ export default function Navbar({ session }) {
             </Link>
           )}
           {/* Login Link - Only visible to non-authenticated users */}
-          {!session && (
+          {!session && path !== "/" && (
             <Link
               className="active:scale-95 transition duration-75 hover:text-black font-semibold px-2 py-1 rounded-xl hover:bg-success hover:shadow-lg flex gap-2"
               href="/login"
             >
-              Log in <IconLogin />
+              Iniciar sesión <IconLogin />
             </Link>
           )}
           {/* Account Link - Only visible to authenticated users */}
@@ -68,6 +72,7 @@ export default function Navbar({ session }) {
               </div>
             </Link>
           )}
+        </div>
         </div>
       </nav>
 

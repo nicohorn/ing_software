@@ -1,6 +1,6 @@
-import PasswordRecoverToken from "./models/PasswordRecoverToken";
-import User from "./models/User";
-import dbConnect from "./mongoose";
+import PasswordRecoverToken from "../models/PasswordRecoverToken";
+import User from "../models/User";
+import dbConnect from "../mongoose";
 
 // All of these functions are the ones that "talk" with the database. These functions are then consumed in the API routes.
 // They return null if anything goes wrong, this way, it's easier to check and therefore, send notifications to the user to inform that something went wrong.

@@ -103,7 +103,7 @@ export const PasswordChange = ({ user }) => {
             className="accordion-header cursor-pointer rounded-xl font-bold py-3 w-full"
             onClick={() => setIsAccordionOpen(!isAccordionOpen)}
           >
-            Change password
+            Cambiar contraseña
           </div>
           {isAccordionOpen && (
             <div className="accordion-body">
@@ -118,7 +118,7 @@ export const PasswordChange = ({ user }) => {
                     inputErrors.oldPassword ? "border-red-500" : ""
                   }`}
                   type="password"
-                  placeholder="Current password"
+                  placeholder="Contraseña actual"
                 />
                 {inputErrors.oldPassword && (
                   <p className="text-red-500 text-sm">
@@ -132,7 +132,7 @@ export const PasswordChange = ({ user }) => {
                     inputErrors.newPassword ? "border-red-500" : ""
                   }`}
                   type="password"
-                  placeholder="New password"
+                  placeholder="Nueva contraseña"
                 />
                 {inputErrors.newPassword && (
                   <p className="text-red-500 text-sm">
@@ -146,7 +146,7 @@ export const PasswordChange = ({ user }) => {
                     inputErrors.repeatedNewPassword ? "border-red-500" : ""
                   }`}
                   type="password"
-                  placeholder="Repeat new password"
+                  placeholder="Repetir nueva contraseña"
                 />
                 {inputErrors.repeatedNewPassword && (
                   <p className="text-red-500 text-sm">
@@ -155,7 +155,7 @@ export const PasswordChange = ({ user }) => {
                 )}
                 {!passwordsMatch && (
                   <p className="animate-pulse">
-                    Passwords don&apos;t match, try again
+                    Las contraseñas no coinciden
                   </p>
                 )}
                 <button
@@ -165,7 +165,7 @@ export const PasswordChange = ({ user }) => {
                   {loadingPassword ? (
                     <div className="w-4 h-4 border-2 border-black rounded-full animate-spin"></div>
                   ) : (
-                    "Save changes"
+                    "Guardar cambios"
                   )}
                 </button>
               </form>

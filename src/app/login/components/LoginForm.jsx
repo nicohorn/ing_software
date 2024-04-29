@@ -64,7 +64,7 @@ export default function LoginForm() {
 
   return (
     <div>
-      <h1 className="font-bold text-2xl ml-2 mb-2">Log in</h1>
+      <h1 className="font-bold text-2xl ml-2 mb-2">Iniciar sesión</h1>
       <div className="md:max-w-96 w-[95vw] bg-primary rounded-lg shadow-lg p-6">
         <div className="text-black flex flex-col gap-4">
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -97,7 +97,7 @@ export default function LoginForm() {
             )}
             {/* Link to password recovery page */}
             <Link href="/forgot_password" className="text-xs ml-1 text-white">
-              Forgot password? Click here.
+              ¿Olvidaste tu contraseña? Hacé click acá.
             </Link>
 
             {/* Submit button */}
@@ -105,7 +105,7 @@ export default function LoginForm() {
               className="bg-green-500 text-white rounded-md py-2 font-semibold shadow-md"
               type="submit"
             >
-              {loading ? <LoadingSpinner /> : "Log in"}
+              {loading ? <LoadingSpinner /> : "Iniciar sesión"}
             </button>
             {invalidCredentials && (
               <p className="animate-pulse text-gray-400">
@@ -117,7 +117,7 @@ export default function LoginForm() {
       </div>
       {/* Link to signup page */}
       <Link href="/signup" className="text-xs ml-1 text-white">
-        Don&apos;t have an account? Create one here.
+        ¿No tenés una cuenta? Creá una haciendo click acá.
       </Link>
     </div>
   );

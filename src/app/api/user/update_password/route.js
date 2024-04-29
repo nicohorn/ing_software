@@ -1,4 +1,4 @@
-import { findUserByEmail, updateUserPassword } from "@/index";
+import { findUserByEmail, updateUserPassword } from "@/controllers/index";
 import { createHashBcrypt, verifyHashBcrypt } from "@/utils/hash";
 import { NextResponse } from "next/server";
 
