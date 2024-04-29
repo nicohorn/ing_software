@@ -28,8 +28,7 @@ Abrí [http://localhost:3000](http://localhost:3000) en tu navegador para ver el
 
 Ejemplo de historia de usuario:
 
-```js
-/*
+```
 Como usuario registrado
 Quiero iniciar sesión en el sistema
 Para acceder a mi cuenta y utilizar las funcionalidades personalizadas
@@ -42,5 +41,5 @@ Criterios de aceptación:
 5. El sistema debe mantener la sesión del usuario activa hasta que cierre sesión o después de un período de inactividad predefinido.
 6. El usuario debe tener la opción de seleccionar "Recordar mi cuenta" para que sus credenciales se almacenen de forma segura y se auto-completen en futuros inicios de sesión.
 7. Si el usuario ha olvidado su contraseña, debe haber un enlace "¿Olvidaste tu contraseña?" que le permita restablecerla a través de su correo electrónico registrado.
-*/
+
 ```
